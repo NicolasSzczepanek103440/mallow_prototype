@@ -1,0 +1,26 @@
+/* Voor Nicolas:
+
+NIET VERGETEN OM 'GLOBAL' .CSS BESTAND TE MAKEN 
+bijv. voor de boombox, uitklapmenu's, enz. */
+
+
+body {
+    margin-top: 0;
+    margin-left: 0;
+    overflow: hidden;
+}
+
+.template {
+    display: none;
+}
+
+.achtergrond {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.boombox {
+    margin-left: 1600px;
+    margin-top: 280px;
+}

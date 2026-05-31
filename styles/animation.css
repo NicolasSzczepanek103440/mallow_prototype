@@ -1,0 +1,85 @@
+/* animaties voor het bewegen van het spelen-bar */
+@keyframes sidebar_move1 { /* bar openklappen */
+    0% {
+        margin-left: -349px;
+    }
+
+    100% {
+        margin-left: 7px;
+    }
+}
+
+@keyframes sidebar_move2 { /* bar dichtklappen */
+    0% {
+        margin-left: 7px;;
+    }
+
+    100% {
+        margin-left: -349px;
+    }
+}
+
+
+
+/* animaties voor het bewegen van de locatie-bar */
+@keyframes topbar_move1 { /* bar openklappen */
+    0% {
+        margin-top: -235px;
+    }
+
+    100% {
+        margin-top: 4px;
+    }
+}
+
+@keyframes topbar_move2 { /* bar dichtklappen */
+    0% {
+        margin-top: 4px;
+    }
+
+    100% {
+        margin-top: -235px;
+    }
+}
+
+
+
+/* Animaties om Mallow te laten bewegen */
+@keyframes walkanimation1_MALLOW { /* Rechts bewegen */
+    0% {
+
+        margin-left: 0px;
+    }
+
+    100% {
+        margin-left: 600px;
+    }
+}
+
+@keyframes walkanimation2_MALLOW { /* Links bewegen */
+    0% {
+
+        margin-left: 600px;
+    }
+
+    100% {
+        margin-left: 0px;
+    }
+}
+
+@keyframes bounce_MALLOW { /* Gedeelte van loopanimatie (op en neer 'springen') */
+    0% {
+        width: 400px;
+        height: 400px;
+    }
+
+    50% {
+        width: 450px;
+        height: 350px;
+    }
+
+    100% {
+        width: 400px;
+        height: 400px;
+    }
+}
