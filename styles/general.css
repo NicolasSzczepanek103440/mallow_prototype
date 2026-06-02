@@ -299,10 +299,25 @@ a {
     align-items: center;
     justify-content: center;
     height: 50px;
-    width: 280px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
+    gap: 10px;
+}
+
+audio {
+    width: 290px;
+}
+
+.loop_music {
+    width: 50px;
+    height: 50px;
+    background-color: red;
+}
+
+.loop_music img {
+    width: 100%;
+    height: 100%;
 }
 
 .songselect_container {
@@ -422,9 +437,9 @@ a {
 .mallow {
     animation-name: none;
     animation-fill-mode: forwards;
-    animation-duration: 3s, 0.5s;
+    animation-duration: 6s, 0.5s;
     animation-timing-function: linear, ease-in-out;
-    animation-iteration-count: 1, 6;
+    animation-iteration-count: 1, 12;
 
     position: absolute;
     width: 400px;
