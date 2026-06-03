@@ -20,6 +20,7 @@ function moveLeft() {
 
     setTimeout(function() {
         mallow.style.animationName = 'walkanimation2_MALLOW, bounce_MALLOW';
+<<<<<<< HEAD
     }, 5300);
 
     setTimeout(function() {
@@ -33,10 +34,21 @@ function moveLeft() {
     setTimeout(function() {
         mallow_img.src = 'images/mallow_front.png';
     }, 12200)
+=======
+    }, 6000);
+>>>>>>> 0e4d5b013452d40f5fb4370a1c72a567106d2c9c
+
+    setTimeout(function() {
+        mallow.style.animationName = 'walkanimation2_MALLOW';
+    }, 12000);
 
     setTimeout(function() {
         moveRight();
+<<<<<<< HEAD
     }, 18900)
+=======
+    }, 18000)
+>>>>>>> 0e4d5b013452d40f5fb4370a1c72a567106d2c9c
 }
 
 function moveRight() {
@@ -52,6 +64,7 @@ function moveRight() {
 
     setTimeout(function() {
         mallow.style.animationName = 'walkanimation1_MALLOW, bounce_MALLOW';
+<<<<<<< HEAD
     }, 5300);
 
     setTimeout(function() {
@@ -65,9 +78,17 @@ function moveRight() {
     setTimeout(function() {
         mallow_img.src = 'images/mallow_front.png';
     }, 12200)
+=======
+    }, 6000);
+>>>>>>> 0e4d5b013452d40f5fb4370a1c72a567106d2c9c
+
+    setTimeout(function() {
+        mallow.style.animationName = 'walkanimation1_MALLOW';
+    }, 12000);
 
     setTimeout(function() {
         moveLeft();
+<<<<<<< HEAD
     }, 18900)
 }
 
@@ -111,3 +132,7 @@ mallow.addEventListener("mouseover", (event) => {
 
     
   });
+=======
+    }, 18000)
+}
+>>>>>>> 0e4d5b013452d40f5fb4370a1c72a567106d2c9c

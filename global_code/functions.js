@@ -2,47 +2,92 @@
 Hieraan kunt u denken aan de uitklapmenu's, de boombox en nog meer. Dit geldt voor alle pagina's. */
 
 // Objecten voor de lijst met liedjes met zijn artiesten en albumcovers
+
+
+// test
+
 let songs_and_artists = {
     "catface": {
         Name: ":3",
         Artist: "Tanger",
-        Album_Picture: "URL",
-        Album_Song: "music_catface_tanger.mp3"
+        Album: "images/albumcover_catface.jpeg",
+        Artist_Pfp: "images/tanger_pfp.jpeg",
+
+        Album_Song: "music_catface_tanger.mp3",
+
+        id: 1
     },
 
     "IdRatherBeThereWithYou": {
         Name: "I'd Rather Be There With You",
         Artist: "Lil Kemi",
-        Album: "URL",
-        Album_Song: "music_idratherbetherewithyou_lilkemi.mp3"
+        Album: "images/lilkemi_pfp.jpeg",
+        Artist_Pfp: "images/lilkemi_pfp.jpeg",
+
+
+        Album_Song: "music_idratherbetherewithyou_lilkemi.mp3",
+
+        id: 2
     },
 
     "AloneIknow": {
         Name: "Alone I know",
         Artist: "Lil Kemi",
-        Album: "URL",
-        Album_Song: "music_aloneiknow_lilkemi.mp3"
+        Album: "images/aloneiknow_album.jpg",
+        Artist_Pfp: "images/lilkemi_pfp.jpeg",
+
+
+        Album_Song: "music_aloneiknow_lilkemi.mp3",
+
+        id: 3
     },
 
     "anywhereyouare": {
         Name: "Anywhere You Are!",
         Artist: "Lil Kemi",
-        Album: "URL",
-        Album_Song: "music_anywhereyouare_lilkemi.mp3"
+        Album: "images/lilkemi_pfp.jpeg",
+        Artist_Pfp: "images/lilkemi_pfp.jpeg",
+
+
+        Album_Song: "music_anywhereyouare_lilkemi.mp3",
+
+        id: 4
     },
 
     "dancingaroundincirclesuntilmylittlefeetfalloff": {
         Name: "dancing around in circles until my little feet fall off",
         Artist: 'spellcasting',
-        Album: 'URL',
-        Album_Song: "music_dancingaroundincirclesuntilmylittlefeetfalloff_spellcasting.mp3"
+        Album: 'images/albumcover_dancingaroundincirclesuntilmylittlefeetfalloff.jpeg',
+        Artist_Pfp: "images/spellcasting_pfp.jpg",
+
+
+        Album_Song: "music_dancingaroundincirclesuntilmylittlefeetfalloff_spellcasting.mp3",
+
+        id: 5
+    },
+
+    "songformylostghostfriends": {
+        Name: "song for my lost ghost friends",
+        Artist: 'spellcasting',
+        Album: 'images/albumcover_songformylostghostfriends.jpeg',
+        Artist_Pfp: "images/spellcasting_pfp.jpg",
+
+
+        Album_Song: "music_songformylostghostfriends_spellcasting.mp3",
+
+        id: 6
     },
 
     "Hero": {
         Name: "Hero",
         Artist: "Meego",
-        Album: 'URL',
-        Album_Song: "music_hero_meego.mp3"
+        Album: 'images/albumcover_meero.jpeg',
+        Artist_Pfp: "images/meego_pfp.jpeg",
+
+
+        Album_Song: "music_hero_meego.mp3",
+
+        id: 7
     }
 }
 
@@ -148,17 +193,23 @@ for (let x in songs_and_artists) {
     artist_name.className += 'songselectsong_album';
     artist_name.innerHTML = songs_and_artists[x]['Artist'];
 
-    let otherSongDetails = document.createElement("div"); // Hier komen de album- en artiestfoto's te staan
-    otherSongDetails.className += 'othersong_details';
-
     let albumPhoto = document.createElement("div"); // Weergeving album
     albumPhoto.className += 'album_cover';
+
+    let albumPhoto_foto = document.createElement("img");
+    albumPhoto.appendChild(albumPhoto_foto);
+    albumPhoto_foto.src = songs_and_artists[x]["Album"]; // SUPER IMPORTANT
 
     let artistPfp = document.createElement("div"); // Foto/pfp van de artiest
     artistPfp.className = "pfp_artist";
 
+    let artistPfp_foto = document.createElement("img");
+    artistPfp.appendChild(artistPfp_foto);
+    artistPfp_foto.src = songs_and_artists[x]["Artist_Pfp"];
+
     let clickToSelect = document.createElement("div"); // knop die liedjes selecteert
     clickToSelect.className += 'click_to_select unselected';
+    clickToSelect.id = `click_to_select_${x}`;
 
     song_list.appendChild(song_box);
     song_box.appendChild(song1);
@@ -174,17 +225,84 @@ function songChange(status) {
     let controls_box = document.querySelector('.controls_box');
     controls_box.removeChild(audio);
 
-
     for (let x in songs_and_artists) {
+        let click_to_select = document.getElementById(`click_to_select_${x}`);
+        click_to_select.className = 'click_to_select unselected';
+
         if (status == x) {
+            let click_to_selectSELECTED = document.getElementById(`click_to_select_${status}`);
+            click_to_selectSELECTED.className = 'click_to_select selected';
+            
             let song_select = songs_and_artists[x]["Album_Song"]
-            console.log(song_select);
             let newAudio = document.createElement('audio');
+
+            if (audio.loop == true) {
+                newAudio.loop = true;
+            }
+
+            else {
+                newAudio.loop = false;
+            }
+
             newAudio.controls = true;
+            newAudio.autoplay = true;
             controls_box.appendChild(newAudio);
             newAudio.innerHTML = `<source src='sounds/${song_select}' type='audio/mp3'>`
         }
-        
-        
     }
+}
+
+// Functie dat gebruikt wordt om automatisch andere liedjes aan te zetten tijdens het luisteren
+var songEye = setInterval(function() {
+    let currentTime = Math.floor(document.querySelector("audio").currentTime);
+    let duration = Math.floor(document.querySelector("audio").duration);
+
+    console.log(currentTime);
+    console.log(duration);
+
+    if (currentTime == duration ) {
+        let audio = document.querySelector("audio");
+        let selected = document.querySelector(".selected");
+        let selectedElement = selected.parentElement.id;
+
+        for (let x in songs_and_artists) {
+            if (x == selectedElement && audio.loop == true) {
+                console.log("Loop staat aan. Kan niet verder.");
+            }
+
+            if (x == selectedElement && audio.loop != true) {
+                let id = songs_and_artists[x]["id"];
+                for (let y in songs_and_artists) {
+                    if (songs_and_artists[y]["id"] == id + 1) {
+                        songChange(y);
+                    }
+
+                    if (id == Object.keys(songs_and_artists).length) {
+                        if (songs_and_artists[y]["id"] == 1) {
+                            songChange(y);
+                        }
+                    }
+                }
+            }
+
+
+        }
+    }
+}, 1);
+
+// Functie van het aan- en uitzetten van de loop functie (voor liedjes)
+function loop(status) {
+    let audio = document.querySelector("audio");
+    let HTML_element = document.querySelector(".loop_music");
+
+    if (status == 'true') {
+        HTML_element.setAttribute("onclick", "loop('false')");
+        audio.loop = true;
+    }
+
+    if (status == 'false') {
+        HTML_element.setAttribute("onclick", "loop('true')");
+        audio.loop = false;
+    }
+    
 }
