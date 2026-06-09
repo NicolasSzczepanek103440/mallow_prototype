@@ -11,17 +11,15 @@
     <script src="global_code/page_change.js" defer></script>
     <script src="global_code/functions.js" defer></script>
     <script src="global_code/mallow_functions.js" defer></script>
+    <script src="global_code/bar_system.js" defer></script>
 </head>
 <body>
-    <img src="images/livingroom_template.jpg" class="achtergrond">
-
     <div class="locationbar_container"> <!-- Deze bar wordt gebruikt om naar verschillende pagina's te gaan -->
         <div class="back_locationbar">
             <div class="location_bar"> 
             <a><div class="locationbar_option current">woonkamer</div></a> <!-- !! JAVASCRIPT -->
             <a><div class="locationbar_option">badkamer</div></a> <!-- !! JAVASCRIPT -->
-            <a><div class="locationbar_option">--</div></a> <!-- !! JAVASCRIPT -->
-            <a><div class="locationbar_option shop">shop</div></a> <!-- !! JAVASCRIPT -->
+            <a><div class="locationbar_option shop" onclick="page_change('shop')">shop</div></a> <!-- !! JAVASCRIPT -->
         </div>
         </div>
         
@@ -34,36 +32,36 @@
 
     <div class="mallow_status"> <!-- Hier wordt de status van Mallow weergegeven -->
         <div class="mallow_icon">
-            <img src="images/mallow_template.jpg">
+            <img src="images/mallow_sprites/mallow_front.png">
         </div>
         <div class="percentages_en_icoontjes"> <!-- Hier worden de percentages en icoontjes vertoont -->
             <div class="foodicon_container">
                 <div class="food_icon">
-                    <img src="images/placeholder.png">
+                    <img src="images/icons/foodicon_template.png">
                 </div>
                 <div class="food_icon">
-                    <img src="images/placeholder.png">
+                    <img src="images/icons/drinkicon_template.png">
                 </div>
                 <div class="food_icon">
-                    <img src="images/placeholder.png">
+                    <img src="images/icons/hygieneicon_template.jpg">
                 </div>
             </div>
             
             <div class="percentage_container">
-                <div class="percentage"><span>100%</span></div>
-                <div class="percentage"><span>100%</span></div>
-                <div class="percentage"><span>100%</span></div>
+                <div class="percentage_box"><span class="percent percent_food">100%</span></div>
+                <div class="percentage_box"><span class="percent percent_thirst">100%</span></div>
+                <div class="percentage_box"><span class="percent percent_hygiene">100%</span></div>
             </div>
         </div>
         <div class="bars">
             <div class="bar">
-                <div class="inside_bar"></div>
+                <div class="inside_bar food"></div>
             </div>
             <div class="bar">
-                <div class="inside_bar"></div>
+                <div class="inside_bar thirst"></div>
             </div>
             <div class="bar">
-                <div class="inside_bar"></div>
+                <div class="inside_bar hygiene"></div>
             </div>
         </div>
     </div>
@@ -75,7 +73,6 @@
             <div class="playbar_option">a</div>
             <div class="playbar_option">b</div>
             <div class="playbar_option">c</div>
-            <div class="playbar_option">d</div>
         </div>
         </div>
 
@@ -140,21 +137,15 @@
                 </div>  
             </div>
         </div>
-        
-        
     </div>
+
+    <div class="item" onclick="testDrag()"></div>
 
     <div class="bordermove_mallow"> <!-- Dit is de maximale breedte en hoogte waarop Mallow kan bewegen-->
         <div class="mallow"> <!-- Dit is Mallow zelf -->
-            <img src="images/mallow_template.jpg">
+            <img class="mallow_img" src="images/mallow_sprites/mallow_left.png">
         </div>
     </div>
-
-    <div class="now_playing"> <!-- Bar dat aangeeft welk lied er nu speelt en van welk artiest het vandaan komt -->
-        <span class="artist_name">artist_name</span>
-        <span class="song_name">song_name</span>
-        <div class="icon_album"><img src="images/placeholder.png"></div>
-    </div> 
 
     <div class="game_options"> <!-- Dit zijn de knoppen waarmee de gebruiker naar de hoofdscherm of instellingen kan gaan-->
         <div class="mainmenu_knop" onclick="page_change('hoofdmenu')">Hoofdmenu</div> <!-- Teruggaan naar hoofdmenu -->

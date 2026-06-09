@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+    <link rel="stylesheet" href="styles/shop.css">
+    <link rel="stylesheet" href="styles/animation.css">
+    <link rel="stylesheet" href="styles/general.css">
+
+    <script src="global_code/page_change.js" defer></script>
+    <script src="global_code/functions.js" defer></script>
+    <script src="global_code/mallow_functions.js" defer></script>
+</head>
+<body>
+
+    <div id="shop_interface">
+        <div id="shop_selectitem">
+            <div class="select hoeden_select category_selected">
+                <b>Hoeden</b>
+            </div>
+            <div class="select kleren_select">
+                <b>Kleren</b>
+            </div>
+            <div class="select achtergrond_select">
+                <b>Achtergronden</b>
+            </div>
+        </div>
+
+        <div id="shop_itemselectcontainer">
+            <div id="item_container">
+                <div class="itemselect item_selected">
+                    text
+                </div>
+                <div class="itemselect item_unselected">
+                    text
+                </div>
+            </div>
+            
+        </div>
+        <div id="mallowdressup_container">
+            
+            <div id="mallow_dressup">
+                <img src="images/mallow_sprites/mallow_front.png">
+            </div>
+            <div id="mallow_platform_container">
+                <div id="arrow_left">
+                    <span><</span>
+                </div>
+                <div id="mallow_platform"></div>
+                <div id="arrow_right">
+                    <span>></span>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    
+
+
+    <div class="boombox"> <!-- Boombox om muziek te veranderen -->
+        
+        <div class="boombox_touch" onclick="boomboxOpen('open')">
+            <img src="images/boombox_placeholder.png">
+        </div>
+
+        <div class="boombox_openmenu">
+            <div class="nowplaying_box">
+                <div class="song_and_artist">Now playing:<br><b>[song], [artist]</b></div>
+
+
+                <div class="album_and_artist">
+                    <div class="album">
+                        <img src="images/placeholder.png">
+                    </div>
+                    <div class="artist">
+                        <img src="images/placeholder.png">
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="controls_box">
+                <div class="loop_music" onclick="loop('true')">
+                    <img src="images/loop.jpg">
+                </div>
+                <audio controls>
+                    <source src="" type="audio/mp3">
+                </audio>
+            </div>
+
+            <div class="songselect_container">
+                <div class="song_select" onclick="selecteerLied('open')">
+                    <b>Selecteer lied</b>
+                </div>
+
+                <div class="songselect_menu"> 
+                    <div class="songselect_song, template"> <!-- Template -->
+                        <div class="songselectsong_name">song1</div>
+                        <div class="songselectsong_album">artist</div>
+                            <div class="album_cover">
+                                <img src="images/placeholder.png" alt="">
+                            </div>
+                            <div class="pfp_artist">
+                                <img src="images/placeholder.png" alt="">
+                            </div>
+                        <div class="click_to_select unselected"></div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+
+    <div class="game_options"> <!-- Dit zijn de knoppen waarmee de gebruiker naar de hoofdscherm of instellingen kan gaan-->
+        <div class="mainmenu_knop" onclick="page_change('hoofdmenu')">Hoofdmenu</div> <!-- Teruggaan naar hoofdmenu -->
+        <div class="settings_box">
+            <img src="images/settings_placeholder.png">
+        </div>
+    </div>
+    
+</body>
+</html>

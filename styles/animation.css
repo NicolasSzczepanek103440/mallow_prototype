@@ -47,19 +47,17 @@
 /* Animaties om Mallow te laten bewegen */
 @keyframes walkanimation1_MALLOW { /* Rechts bewegen */
     0% {
-
-        margin-left: 0px;
+        margin-left: -270px;
     }
 
     100% {
-        margin-left: 600px;
+        margin-left: 400px; /* !!! */
     }
 }
 
 @keyframes walkanimation2_MALLOW { /* Links bewegen */
     0% {
-
-        margin-left: 600px;
+        margin-left: 675px;
     }
 
     100% {
@@ -69,17 +67,17 @@
 
 @keyframes bounce_MALLOW { /* Gedeelte van loopanimatie (op en neer 'springen') */
     0% {
-        width: 400px;
+        width: 600px;
         height: 400px;
     }
 
     50% {
-        width: 450px;
+        width: 650px;
         height: 350px;
     }
 
     100% {
-        width: 400px;
+        width: 600px;
         height: 400px;
     }
 }

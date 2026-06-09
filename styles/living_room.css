@@ -1,13 +1,11 @@
-/* Voor Nicolas:
-
-NIET VERGETEN OM 'GLOBAL' .CSS BESTAND TE MAKEN 
-bijv. voor de boombox, uitklapmenu's, enz. */
-
-
 body {
     margin-top: 0;
     margin-left: 0;
     overflow: hidden;
+
+    background: url(../images/livingroom_template.jpg);
+    background-size: cover;
+    background-position: center;
 }
 
 .template {

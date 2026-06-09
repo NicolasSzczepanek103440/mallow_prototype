@@ -257,9 +257,6 @@ var songEye = setInterval(function() {
     let currentTime = Math.floor(document.querySelector("audio").currentTime);
     let duration = Math.floor(document.querySelector("audio").duration);
 
-    console.log(currentTime);
-    console.log(duration);
-
     if (currentTime == duration ) {
         let audio = document.querySelector("audio");
         let selected = document.querySelector(".selected");

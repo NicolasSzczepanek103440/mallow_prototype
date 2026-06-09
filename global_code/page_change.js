@@ -15,4 +15,8 @@ function page_change(functie) { // Deze functie bepaalt welke pagina de gebruike
     if (functie == 'hoofdmenu') {
         window.location = "main_menu.html";
     }
+
+    if (functie == 'shop') {
+        window.location = "../shop.html";
+    }
 }
