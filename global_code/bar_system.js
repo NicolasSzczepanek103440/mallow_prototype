@@ -32,13 +32,13 @@ let thirststatusDecrease = setInterval(function() {
     }
 }, 120000)
 
-let thirststatusDecrease = setInterval(function() {
-    thirst_bar.style.height = `${thirst_status}%`
-    thirst_percent.innerHTML = `${thirst_status}%`
-    thirst_status = thirst_status - 2;
+let hygienestatusDecrease = setInterval(function() {
+    hygiene_bar.style.height = `${thirst_status}%`
+    hygiene_bar.innerHTML = `${thirst_status}%`
+    hygiene_bar = thirst_status - 2;
 
-    if (thirst_status <= 20) {
-        thirst_status = 20;
+    if (hygiene_bar <= 20) {
+        hygiene_bar = 20;
     }
 }, 150000)
 

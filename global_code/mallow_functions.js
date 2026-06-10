@@ -137,3 +137,7 @@ function testDrag() {
 
     window.addEventListener('mousemove', abc);
 }
+
+function animationMallow() {
+    console.log("hallo!");
+}
