@@ -10,8 +10,35 @@ Mallow diagonal (right + left): 550x400px
 Mallow right + left: 600x400px
 */
 
+function mallowTouch() {
+    let meow = document.createElement("audio");
+    meow.src = 'sounds/mallow/mallow_meow.mp3'
+    meow.autoplay = true;
+
+    mallow.appendChild(meow)
+
+    if (mallow_img.src = 'images/mallow_sprites/mallow_front.png') {
+        mallow_img.src = 'images/mallow_template.jpg';
+    }
+    
+
+    setTimeout(function() {
+        mallow.removeChild(meow);
+
+        mallow_img.src = 'images/mallow_sprites/mallow_front.png';
+    }, 1200)
+}
+
+
+
+
+
+
+
+// Malow laten bewegen (vanaf linkerkant)
 moveRight();
 
+// Functies om Mallow te laten bewegen
 function moveLeft() {
     mallow.style.marginLeft = '675px';
     mallow_img.src = 'images/mallow_sprites/mallow_front.png';
@@ -53,8 +80,6 @@ function moveLeft() {
     }, 18000)
 }
 
-
-
 function moveRight() {
     mallow_img.src = 'images/mallow_sprites/mallow_front.png';
     mallow.style.width = '325px';
@@ -95,6 +120,8 @@ function moveRight() {
     }, 19200)
 } 
 
+
+// De functies om met Mallow te interacteren
 function startPlaying(activity) {
     if (activity == 'food') {
         item.style.display = 'block';
@@ -108,10 +135,6 @@ function stopPlaying() {
 }
 
 let item = document.querySelector(".item");
-
-setInterval(function() {
-    let test = mallow.getBoundingClientRect();
-}, 1000);
 
 let abc = function(e) {
     item.style.marginLeft = (`${e.clientX - 117.5}px`);

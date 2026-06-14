@@ -2,10 +2,6 @@ body {
     margin-top: 0;
     margin-left: 0;
     overflow: hidden;
-
-    background: url(../images/livingroom_template.jpg);
-    background-size: cover;
-    background-position: center;
 }
 
 .template {
@@ -21,4 +17,12 @@ body {
 .boombox {
     margin-left: 1600px;
     margin-top: 280px;
+}
+
+#test2 {
+    width: 200px;
+    height: 200px;
+    background-color: green;
+    position: absolute;
+    display: none;
 }

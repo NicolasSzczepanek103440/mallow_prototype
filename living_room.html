@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles/living_room.css">
     <link rel="stylesheet" href="styles/animation.css">
     <link rel="stylesheet" href="styles/general.css">
+    <link rel="icon" href="images/icons/Mallow_favicon.png">
 
     <script src="global_code/page_change.js" defer></script>
     <script src="global_code/functions.js" defer></script>
@@ -14,6 +15,21 @@
     <script src="global_code/bar_system.js" defer></script>
 </head>
 <body>
+
+    <div class="background_container">
+
+        <div id="backgroundprop_cattree" class="background_prop">
+            <img src="images/backgrounds/background_props/cattree.png" alt="">
+        </div>
+
+        <div id="backgroundprop_foodandwater" class='background_prop'>
+                <img src="images/backgrounds/background_props/FoodBowl.png">
+                <img src="images/backgrounds/background_props/WaterBowl.png">
+        </div>
+
+        <img src="images/backgrounds/background_woonkamer.jpg" class="background_woonkamer" alt="">
+    </div>
+
     <div class="locationbar_container"> <!-- Deze bar wordt gebruikt om naar verschillende pagina's te gaan -->
         <div class="back_locationbar">
             <div class="location_bar"> 
@@ -83,67 +99,69 @@
     </div>
 
 
-    <div class="boombox"> <!-- Boombox om muziek te veranderen -->
+    <div class="boombox" onclick="boomboxMove()"> <!-- Boombox om muziek te veranderen -->
         
         <div class="boombox_touch" onclick="boomboxOpen('open')">
             <img src="images/boombox_placeholder.png">
         </div>
 
         
-        
-        
         <div class="boombox_openmenu">
             <div class="nowplaying_box">
-                <div class="song_and_artist">Now playing:<br><b>[song], [artist]</b></div>
-
-
+                <div class="song_and_artist">Geen lied geselecteerd!</b></div>
                 <div class="album_and_artist">
                     <div class="album">
-                        <img src="images/placeholder.png">
+                        <img class="album_img" src="images//icons/Mallow_icon.jpg">
                     </div>
                     <div class="artist">
-                        <img src="images/placeholder.png">
+                        <img class="artist_img" src="images/icons/Mallow_icon.jpg">
                     </div>
                 </div>
                 
             </div>
+            <div class="rest_box">
 
-            <div class="controls_box">
-                <div class="loop_music" onclick="loop('true')">
-                    <img src="images/loop.jpg">
-                </div>
-                <audio controls>
-                    <source src="" type="audio/mp3">
-                </audio>
-            </div>
-
-            <div class="songselect_container">
-                <div class="song_select" onclick="selecteerLied('open')">
-                    <b>Selecteer lied</b>
+                <div class="controls_box">
+                                <div class="loop_music" onclick="loop('true')">
+                                    <img src="images/loop.jpg">
+                                </div>
+                                <audio controls>
+                                    <source src="" type="audio/mp3">
+                                </audio>
                 </div>
 
-                <div class="songselect_menu"> 
-                    <div class="songselect_song, template"> <!-- Template -->
-                        <div class="songselectsong_name">song1</div>
-                        <div class="songselectsong_album">artist</div>
-                            <div class="album_cover">
-                                <img src="images/placeholder.png" alt="">
+                <div class="songselect_container">
+                                <div class="song_select" onclick="selecteerLied('open')">
+                                    <b>Selecteer lied</b>
+                                </div>
+
+                                <div class="songselect_menu"> 
+                                    <div class="songselect_song, template">
+                                        <div class="songselectsong_name">song1</div>
+                                        <div class="songselectsong_album">artist</div>
+                                            <div class="album_cover">
+                                                <img src="images/placeholder.png" alt="">
+                                            </div>
+                                            <div class="pfp_artist">
+                                                <img src="images/placeholder.png" alt="">
+                                            </div>
+                                        <div class="click_to_select unselected"></div>
+                                    </div>
+                                </div>  
                             </div>
-                            <div class="pfp_artist">
-                                <img src="images/placeholder.png" alt="">
-                            </div>
-                        <div class="click_to_select unselected"></div>
-                    </div>
-                </div>  
+                        </div>
+                </div>
+                
             </div>
         </div>
-    </div>
+
+            
 
     <div class="item" onclick="testDrag()"></div>
 
     <div class="bordermove_mallow"> <!-- Dit is de maximale breedte en hoogte waarop Mallow kan bewegen-->
-        <div class="mallow"> <!-- Dit is Mallow zelf -->
-            <img class="mallow_img" src="images/mallow_sprites/mallow_left.png">
+        <div class="mallow" onclick="mallowTouch()"> <!-- Dit is Mallow zelf -->
+            <img class="mallow_img" src="images/mallow_sprites/mallow_front.png">
         </div>
     </div>
 
@@ -153,6 +171,8 @@
             <img src="images/settings_placeholder.png">
         </div>
     </div>
+
+    <div id="test2" onclick="testfunction()"></div>
     
 </body>
 </html>

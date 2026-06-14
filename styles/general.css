@@ -3,6 +3,38 @@
 NIET VERGETEN OM 'GLOBAL' .CSS BESTAND TE MAKEN 
 bijv. voor de boombox, uitklapmenu's, enz. */
 
+.background_container {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+}
+
+.background_prop {
+    position: absolute;
+}
+
+#backgroundprop_cattree {
+    scale: 1.5;
+    margin-top: 2.2vh;
+}
+
+#backgroundprop_foodandwater {
+    display: flex;
+    gap: 50px;
+    scale: 1.4;
+    margin-top: 74vh;
+    margin-left: 70vw;
+}
+
+
+.background_woonkamer {
+    width: 100%;
+    height: 100%;
+}
+
+.template {
+    display: none;
+}
 
 body {
     margin-top: 0;
@@ -21,6 +53,7 @@ body {
 }
 
 .locationbar_container {
+    z-index: 3;
     position: absolute;
     width: 1100px;
     margin-left: calc(50vw - 550px);
@@ -84,6 +117,7 @@ body {
 }
 
 .arrow_locationbar {
+    cursor: pointer;
     width: 100px;
     height: 100px;
     background-color: blue;
@@ -224,6 +258,7 @@ a {
 }
 
 .playbar_container {
+    z-index: 3;
     display: flex;
     position: absolute;
     margin-top: calc(50vh - 410px);
@@ -261,6 +296,8 @@ a {
 }
 
 .arrow_playerbar {
+    cursor: pointer;
+
     width: 0;
     height: 0;
     border-right: 60px solid transparent;
@@ -296,6 +333,11 @@ a {
     height: 200px;
     background-color: pink;
     position: absolute;
+    z-index: 2;
+}
+
+.boombox_touch {
+    cursor: pointer;
 }
 
 .boombox img, .boombox_touch {
@@ -307,9 +349,7 @@ a {
     display: none;
     flex-direction: column;
     align-items: center;
-    position: absolute;
     width: 400px;
-    height: 200px;
     background-color: purple;
     margin-left: -50px;
     border-radius: 15px;
@@ -320,11 +360,8 @@ a {
 
 .nowplaying_box {
     display: flex;
-    background-color: yellow;
-    justify-content: space-evenly;
-    align-items: center;
+    justify-content: space-around;
     font-size: 20px;
-    padding-bottom: 5px;
     width: 400px;
 }
 
@@ -347,6 +384,7 @@ audio {
     width: 50px;
     height: 50px;
     background-color: red;
+    cursor: pointer;
 }
 
 .loop_music img {
@@ -355,34 +393,37 @@ audio {
 }
 
 .songselect_container {
-    position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 140px;
 }
 
 .song_select {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 300px; 
+    padding-left: 50px;
+    padding-right: 50px;
     background-color: green;
     height: 50px;
     font-size: 23px;
     border-radius: 15px;
     border: 1px solid black;
-    margin-bottom: 5px;
+    cursor: pointer;
 }
 
 .songselect_menu {
     display: none;
     align-items: flex-start;
     flex-direction: column;
-    min-width: 450px;
+    width: 450px;
+    height: 154px;
     background-color: gray;
     border-radius: 15px;
     padding: 7px;
+    position: absolute;
+    margin-top: 60px;
+    overflow-x: auto;
 }
 
 .songselect_song {
@@ -392,6 +433,10 @@ audio {
     margin-bottom: 5px;
     align-items: center;
     cursor: pointer;
+    border-radius: 5px;
+    width: 96%;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 
 .songselectsong_name, .songselectsong_album {
@@ -411,7 +456,7 @@ audio {
 
 .click_to_select {
     width: 30px;
-    height: 30px;
+    height: 30px;;
     margin-left: 13px;
     border-radius: 100%;
 }
@@ -423,11 +468,11 @@ audio {
 
 .selected {
     background-color: red;
-    box-sizing: border-box;
-    border: 2px solid black;
+    border: 1px solid black;
 }
 
 .playbar_option {
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     width: 150px;
@@ -441,22 +486,38 @@ audio {
 .song_and_artist {
     font-size: 24px;
     margin-top: 5px;
+    width: 230px;
+    background-color: red;
+    border-radius: 10px;
+    border: 2px solid black;
 }
 
 .album_and_artist {
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
 .album, .artist {
     height: 50px;
     width: 50px;
-    background-color: red;
 }
 
 .album img, .artist img {
     width: 100%;
     height: 100%;
+    border-radius: 15px;
+    box-sizing: border-box;
+    border: 2px solid black;
+}
+
+.rest_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 139px;
+    width: 100%;
 }
 
 .bordermove_mallow {
@@ -468,6 +529,8 @@ audio {
 }
 
 .mallow {
+    cursor: pointer;
+
     animation-name: none;
     animation-fill-mode: forwards;
     animation-duration: 6s, 0.5s;
@@ -496,7 +559,14 @@ audio {
 .album_cover, .pfp_artist {
     width: 40px;
     height: 40px;
-    background-color: green;
+}
+
+.album_cover img, .pfp_artist img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    box-sizing: border-box;
+    border: 1px solid black;
 }
 
 .icon_artist img {
@@ -554,4 +624,5 @@ audio {
     width: 200px;
     height: 200px;
     position: absolute;
+    display: none;
 }

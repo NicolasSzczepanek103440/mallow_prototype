@@ -10,48 +10,89 @@
 
     <script src="global_code/page_change.js" defer></script>
     <script src="global_code/functions.js" defer></script>
-    <script src="global_code/mallow_functions.js" defer></script>
+    <script src="global_code/shop_functions.js" defer></script>
 </head>
 <body>
+    <div class="background_container">
+        <img src="images/backgrounds/background_shop.jpg" class="background_woonkamer" alt="">
+    </div>
+
+    <div class="locationbar_container"> <!-- Deze bar wordt gebruikt om naar verschillende pagina's te gaan -->
+        <div class="back_locationbar">
+            <div class="location_bar"> 
+            <a><div class="locationbar_option current">woonkamer</div></a> <!-- !! JAVASCRIPT -->
+            <a><div class="locationbar_option">badkamer</div></a> <!-- !! JAVASCRIPT -->
+            <a><div class="locationbar_option shop" onclick="page_change('shop')">shop</div></a> <!-- !! JAVASCRIPT -->
+        </div>
+        </div>
+        
+        <div class="arrowcontainer_locationbar">
+                <div class="arrow_locationbar">
+                    <img src="images/Polygon 1.jpg" onclick="tab_show('top_bar1')">
+                </div>
+            </div>
+    </div>
 
     <div id="shop_interface">
         <div id="shop_selectitem">
-            <div class="select hoeden_select category_selected">
+            <div class="select category_unselected hoeden" onclick='openShopTab("hoeden")'>
                 <b>Hoeden</b>
             </div>
-            <div class="select kleren_select">
+            <div class="select category_unselected kleren" onclick='openShopTab("kleren")'>
                 <b>Kleren</b>
             </div>
-            <div class="select achtergrond_select">
+            <div class="select category_unselected achtergronden" onclick='openShopTab("achtergronden")'>
                 <b>Achtergronden</b>
             </div>
         </div>
 
         <div id="shop_itemselectcontainer">
             <div id="item_container">
-                <div class="itemselect item_selected">
-                    text
-                </div>
-                <div class="itemselect item_unselected">
-                    text
-                </div>
             </div>
             
         </div>
         <div id="mallowdressup_container">
+
+            <div id="options_container">
+                <div id="name_container">
+                    name
+                </div>
+
+                <div id="cost_container">
+                    $--
+                </div>
+
+                <div id="container_equiporbuy">
+
+                    <div id="equip_button" class="lock_equip">
+                        Equip
+                        <div id="lock">
+                            <img src="images/icons/lock_template.png" alt="">
+                        </div>
+                    </div>
+
+                    <div id="buy_button">Buy</div>
+                </div>
+                
+
+            </div>
             
-            <div id="mallow_dressup">
-                <img src="images/mallow_sprites/mallow_front.png">
-            </div>
-            <div id="mallow_platform_container">
-                <div id="arrow_left">
-                    <span><</span>
+            
+            <div id="bottomcontainer_container">
+                <div id="mallow_preview">
+                    <img id="mallow_previewimg" src="images/mallow_sprites/mallow_front.png">
                 </div>
-                <div id="mallow_platform"></div>
-                <div id="arrow_right">
-                    <span>></span>
+                <div id="mallow_platform_container">
+                    <div id="arrow_left">
+                        <span><</span>
+                    </div>
+                    <div id="mallow_platform"></div>
+                    <div id="arrow_right">
+                        <span>></span>
+                    </div>
                 </div>
             </div>
+            
         </div>
         
     </div>

@@ -3,9 +3,6 @@ Hieraan kunt u denken aan de uitklapmenu's, de boombox en nog meer. Dit geldt vo
 
 // Objecten voor de lijst met liedjes met zijn artiesten en albumcovers
 
-
-// test
-
 let songs_and_artists = {
     "catface": {
         Name: ":3",
@@ -97,6 +94,7 @@ let arrow_topbar = document.querySelector(".arrow_locationbar");
 let side_bar = document.querySelector(".playbar_container");
 let top_bar = document.querySelector(".locationbar_container");
 
+let boombox = document.querySelector(".boombox");
 let boombox_touch = document.querySelector(".boombox_touch");
 let boombox_openmenu = document.querySelector(".boombox_openmenu");
 let songselect_menu = document.querySelector(".songselect_menu");
@@ -143,11 +141,19 @@ function tab_show(type_tab) {
 
 
 
-    }
+}
+
+// Functie voor het bewegen van de boombox
+function boomboxMove(){
+    console.log("NOG AFMAKEN BOOMBOX ");
+}
 
 
 // Functie voor het openen/dichtklappen van boomboxmenu
 function boomboxOpen(status) {
+    let album_show = document.querySelector(".album_img");
+    let artist_show = document.querySelector(".artist_img")
+
     if (status == 'open') {
         boombox_openmenu.style.display = "flex";
         boombox_touch.setAttribute("onclick", "boomboxOpen('close')");
@@ -175,6 +181,9 @@ function selecteerLied(status) {
     }
 
 
+
+
+
 // Deze functie wordt gebruikt om alle juiste informatie binnen de liedselectie te plaatsen.
 // VOOR NICOLAS: verander knoppen selected in toekomst
 for (let x in songs_and_artists) {
@@ -198,7 +207,7 @@ for (let x in songs_and_artists) {
 
     let albumPhoto_foto = document.createElement("img");
     albumPhoto.appendChild(albumPhoto_foto);
-    albumPhoto_foto.src = songs_and_artists[x]["Album"]; // SUPER IMPORTANT
+    albumPhoto_foto.src = songs_and_artists[x]["Album"];
 
     let artistPfp = document.createElement("div"); // Foto/pfp van de artiest
     artistPfp.className = "pfp_artist";
@@ -226,13 +235,23 @@ function songChange(status) {
     controls_box.removeChild(audio);
 
     for (let x in songs_and_artists) {
+        let nowplaying = document.querySelector(".song_and_artist");
+
         let click_to_select = document.getElementById(`click_to_select_${x}`);
         click_to_select.className = 'click_to_select unselected';
 
         if (status == x) {
             let click_to_selectSELECTED = document.getElementById(`click_to_select_${status}`);
             click_to_selectSELECTED.className = 'click_to_select selected';
+
+            let album_show = document.querySelector(".album_img");
+            let artist_show = document.querySelector(".artist_img")
+
+            artist_show.src = songs_and_artists[x]["Artist_Pfp"];
+            album_show.src = songs_and_artists[x]["Album"];
+            nowplaying.innerHTML = `Now playing: <b>${songs_and_artists[x]["Artist"]},<br>${songs_and_artists[x]["Name"]}</b>`
             
+
             let song_select = songs_and_artists[x]["Album_Song"]
             let newAudio = document.createElement('audio');
 

@@ -1,12 +1,11 @@
-body {
-    background: url(../images/shopbackgrond_placeholder.jpeg);
-    background-size: 500px;
+.locationbar_container {
+    z-index: 2;
 }
 
 #shop_interface {
     position: absolute;
     display: flex;
-    margin-left: calc(16vw);
+    margin-left: calc(50% - 250px - 404.5px);
     margin-top: calc(40vh - 200px);
     background-color: blue;
     justify-content: space-between;
@@ -34,13 +33,12 @@ body {
     font-size: 50px;
     width: 95%;
     height: 100px;
-    background-color: beige;
     border-radius: 10px;
     border: 3px solid black;
 }
 
 #shop_itemselectcontainer {
-    display: flex;
+    display: none;
     justify-content: flex-start;
     width: 440px;
     height: 650px;
@@ -60,7 +58,7 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     width: 97%;
-    justify-content: space-between;
+    justify-content: center;
     height: 13%;
     gap: 10px;
     background-color: green;
@@ -71,14 +69,23 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 60px;
+    height: 80px;
     background-color: beige;
     border-radius: 15px;
-    width: 40%;
+    width: 80px;
     padding: 10px;
     font-size: 25px;
     font-weight: bold;
     border: 2px solid black;
+}
+
+.itemselect img {
+    width: 100%;
+    height: 100%;
+}
+
+.category_unselected {
+    background-color: beige;
 }
 
 .category_selected {
@@ -99,20 +106,19 @@ body {
 #mallowdressup_container {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    background-color: red;
-    align-items: center;
+    background-color: purple;
+    justify-content: space-around;
     width: 800px;
-    gap: 20px;
     margin-left: 20px;
 }
 
-#mallow_dressup {
+#mallow_preview {
     width: 325px;
     height: 400px;
+    background-color: green;
 }
 
-#mallow_dressup img {
+#mallow_preview img {
     width: 100%;
     height: 100%;
 }
@@ -122,6 +128,74 @@ body {
     flex-direction: row;
     gap: 20px;
     align-items: center;
+}
+
+#options_container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: red;
+    align-items: flex-end;
+}
+
+#cost_container, #name_container{
+    display: flex;
+    min-width: 100px;
+    height: 70px;
+    background-color: green;
+    align-items: center;
+    justify-content: center;
+    font-size: xx-large;
+    border-radius: 15px;
+    border: 2px solid black;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#name_container {
+    min-width: 250px;
+    height: 75px;
+}
+
+#bottomcontainer_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#container_equiporbuy {
+    display: flex;
+    gap: 5px;
+}
+
+#equip_button, #buy_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: xx-large;
+    width: 200px;
+    height: 80px;
+    background-color: aqua;
+    text-shadow: 2px 2px white;
+    border-radius: 15px;
+    border: 2px solid black;
+}
+
+#buy_button {
+    display: none;
+    background-color: green;
+}
+
+#lock {
+    display: none;
+    width: 70px;
+    height: 70px;
+    position: absolute;
+}
+
+#lock img {
+    width: 100%;
+    height: 100%;
 }
 
 #mallow_platform {
