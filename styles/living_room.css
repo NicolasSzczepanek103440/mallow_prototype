@@ -14,15 +14,21 @@ body {
     height: 100%;
 }
 
-.boombox {
-    margin-left: 1600px;
-    margin-top: 280px;
-}
-
 #test2 {
     width: 200px;
     height: 200px;
     background-color: green;
     position: absolute;
     display: none;
+}
+
+.boombox_container {
+    margin-left: 70%;
+    margin-top: 10%;
+}
+
+.mallow_status {
+    /* margin-left oorpsronkelijk 85vw */
+    margin-left: 80vw;
+    margin-top: 10vh;
 }

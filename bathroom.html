@@ -3,20 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Woonkamer</title>
+    <title>Badkamer</title>
     <link rel="stylesheet" href="styles/living_room.css">
     <link rel="stylesheet" href="styles/animation.css">
     <link rel="stylesheet" href="styles/general.css">
     <link rel="icon" href="images/icons/Mallow_favicon.png">
 
-    <script src="global_code/curtain.js" defer></script>
     <script src="global_code/page_change.js" defer></script>
     <script src="global_code/functions.js" defer></script>
     <script src="global_code/mallow_functions.js" defer></script>
     <script src="global_code/bar_system.js" defer></script>
     <script src="global_code/living_room.js" defer></script>
-    <script src="global_code/money.js" defer></script>
-    <script src="global_code/playerstats.js" defer></script>
 </head>
 <body onload="curtainDo('up')">
     <div class="curtain">
@@ -54,41 +51,27 @@
             </div>
     </div>
 
-    <div class="interactomgeving_container">
-        <div class="interactomgeving_titel">
-            Interactie<br>omgeving
-        </div>
-    </div>
-
     <div class="mallow_status"> <!-- Hier wordt de status van Mallow weergegeven -->
         <div class="mallow_icon" onclick="clickStatus('open')">
             <img src="images/mallow_sprites/mallow_front.png">
         </div>
         <div class="percentages_en_icoontjes"> <!-- Hier worden de percentages en icoontjes vertoond -->
-            <div class="container_percentagesenicoontjes">
-                <div class="food_stats stats">
-                    <div class="icon">
-                        <img src="images/icons/food_icon.png">
-                    </div>
-
-                    <div class="percentage_box"><span class="percent percent_food">100%</span></div>
+            <div class="foodicon_container">
+                <div class="food_icon">
+                    <img src="images/icons/foodicon_template.png">
                 </div>
-                
-                <div class="thirst_stats stats">
-                    <div class="icon">
-                        <img src="images/icons/thirst_icon.png">
-                    </div>
-
-                    <div class="percentage_box"><span class="percent percent_thirst">100%</span></div>
+                <div class="food_icon">
+                    <img src="images/icons/drinkicon_template.png">
                 </div>
-
-                <div class="hygiene_stats stats">
-                    <div class="icon">
-                        <img src="images/icons/hygieneicon_template.jpg">
-                    </div>
-
-                    <div class="percentage_box"><span class="percent percent_hygiene">100%</span></div>
+                <div class="food_icon">
+                    <img src="images/icons/hygieneicon_template.jpg">
                 </div>
+            </div>
+            
+            <div class="percentage_container">
+                <div class="percentage_box"><span class="percent percent_food">100%</span></div>
+                <div class="percentage_box"><span class="percent percent_thirst">100%</span></div>
+                <div class="percentage_box"><span class="percent percent_hygiene">100%</span></div>
             </div>
         </div>
         <div class="bars">
@@ -111,8 +94,8 @@
         <div class="back_playbar">
             <div class="playbar_titel">Interacties</div>
             <div class="play_bar"> <!-- Deze bar wordt gebruikt om verschillende dingen te doen met Mallow -->
-            <div class="playbar_option voeren" onclick="interactieStart('voeren')">voeren</div>
-            <div class="playbar_option drinken_geven" onclick="interactieStart('drinken_geven')">drinken geven</div>
+            <div class="playbar_option" onclick="interactie('voeren')">voeren</div>
+            <div class="playbar_option">b</div>
             <div class="playbar_option">c</div>
         </div>
         </div>
@@ -185,41 +168,20 @@
 
             
 
-    <div class="item" onclick="itemDrag()">
-        <img class="item_img" src="" alt="">
-    </div>
+    <div class="item" onclick="itemDrag()"></div>
 
     <div class="mallow_container"> <!-- Dit is de maximale breedte en hoogte waarop Mallow kan bewegen-->
         <div class="mallow" onclick="mallowPet()"> <!-- Dit is Mallow zelf -->
-            <img class="mallow_img" src="images/mallow_sprites/mallow_front.png">
+            <img class="mallow_img" src="images/hoeden/Feesthoed.png">
         </div>
     </div>
 
     <div class="game_options"> <!-- Dit zijn de knoppen waarmee de gebruiker naar de hoofdscherm of instellingen kan gaan-->
-        <div class="main_buttons">
-            <div class="mainmenu_knop" onclick="page_change('hoofdmenu')">Hoofdmenu</div> <!-- Teruggaan naar hoofdmenu -->
-            <div class="settings_box">
+        <div class="mainmenu_knop" onclick="page_change('hoofdmenu')">Hoofdmenu</div> <!-- Teruggaan naar hoofdmenu -->
+        <div class="settings_box">
             <img src="images/settings_placeholder.png">
-            </div>
-        </div>
-        <div class="terug_button" onclick="normalMode()">
-            Terug
         </div>
     </div>
-
-    <div class="howmuchcashcontainer_adjust">
-        <div class="howmuchcash_container">
-            <div class="howmuch_cash">
-                <div class="cash_icon">
-                    <img src="https://cdn-icons-png.flaticon.com/512/217/217853.png" alt="">
-                </div>
-                <div class="cash_amount">
-                    $0
-                </div>
-            </div>
-            <div class="cash_show" onclick="cashShow('hide')">\/</div>
-        </div>
-        
-    </div>
+    
 </body>
 </html>

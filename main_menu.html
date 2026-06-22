@@ -3,15 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Titelscherm</title>
+    <title>Mallow</title>
     <link rel="stylesheet" href="styles/main_menu.css">
+    <link rel="stylesheet" href="styles/general.css">
+    <link rel="stylesheet" href="styles/animation.css">
+    <link rel="icon" href="images/icons/Mallow_favicon.png">
     <script src="global_code/page_change.js" defer></script>
+    <script src="global_code/curtain.js" defer></script>
 </head>
 <body>
-    <div id="titelscherm"><b>Mallow<b></div>
-    <div id="titlebuttons">
-        <div id="play_button" class="buttons_title" onclick="page_change('spelen')">spelen</div>
-        <div id="explain_button" class="buttons_title" onclick="page_change('uitleg')">uitleg</div>
+    <div class="curtain">
+        <img src="images/curtain.png">
     </div>
+
+    <div id="titel_buttons">
+        <div id="titelscherm"><b>Mallow<b></div>
+        <div id="buttons_titel">
+            <div id="play_button" class="buttons_title" onclick="page_change('spelen')">Spelen</div>
+            <div id="uitleg_button" class="buttons_title" onclick="page_change('spelen')">Wat is Mallow?</div>
+        </div>
+    </div>
+    
 </body>
 </html>

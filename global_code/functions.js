@@ -88,12 +88,23 @@ let songs_and_artists = {
     }
 }
 
+let interactieomgevingtitel_container = document.querySelector(".interactomgeving_container");
+let terug_button = document.querySelector(".terug_button");
+
+let interaction_bar = document.querySelector(".playbar_container");
+let side_bar = document.querySelector(".playbar_container");
 let arrow_sidebar = document.querySelector(".arrow_playerbar");
+let knop_voeren = document.querySelector('.voeren');
+let knop_drinkengeven = document.querySelector('.drinken_geven');
+
+let location_bar = document.querySelector(".arrowcontainer_locationbar");
 let arrow_topbar = document.querySelector(".arrow_locationbar");
 
-let side_bar = document.querySelector(".playbar_container");
+
 let top_bar = document.querySelector(".locationbar_container");
 
+let boombox_container = document.querySelector(".boombox_container");
+let boombox_move = document.querySelector(".boombox_move");
 let boombox = document.querySelector(".boombox");
 let boombox_touch = document.querySelector(".boombox_touch");
 let boombox_openmenu = document.querySelector(".boombox_openmenu");
@@ -144,8 +155,27 @@ function tab_show(type_tab) {
 }
 
 // Functie voor het bewegen van de boombox
-function boomboxMove(){
-    console.log("NOG AFMAKEN BOOMBOX ");
+
+centerBoomBox = function(mouse) {
+    boombox_container.style.marginLeft = `${mouse.clientX - 275}px`;
+    boombox_container.style.marginTop = `${mouse.clientY - 27.5}px`;
+}
+
+function boomboxMove(status){
+
+    if (status == true) {
+        window.addEventListener("mousemove", centerBoomBox);
+        boombox_move.setAttribute("onclick", "boomboxMove(false)");
+    }
+
+    if (status == false) {
+        window.removeEventListener("mousemove", centerBoomBox);
+        boombox_move.setAttribute("onclick", "boomboxMove(true)");
+    }
+
+    
+
+    
 }
 
 
@@ -180,12 +210,7 @@ function selecteerLied(status) {
         }
     }
 
-
-
-
-
 // Deze functie wordt gebruikt om alle juiste informatie binnen de liedselectie te plaatsen.
-// VOOR NICOLAS: verander knoppen selected in toekomst
 for (let x in songs_and_artists) {
     let song_list = document.querySelector(".songselect_menu"); // Hier komen de selectie liedjes te staan
 
@@ -321,4 +346,106 @@ function loop(status) {
         audio.loop = false;
     }
     
+}
+
+// Functies voor het uitklappen en dichtklappen van de statusmenu
+let mallow_icon = document.querySelector(".mallow_icon");
+let foodicons_container = document.querySelector(".percentages_en_icoontjes");
+let bar_container = document.querySelector(".bars");
+let bar_food = document.querySelector(".food").parentElement;
+let bar_thirst = document.querySelector(".thirst").parentElement;
+let bar_hygiene = document.querySelector(".hygiene").parentElement;
+
+function clickStatus(func) {
+
+    if (func == 'open') {
+        foodicons_container.style.animationName = 'iconsAndPercentagesOpen';
+        bar_container.style.animationName = 'barsIconContainerOpen';
+        bar_food.style.animationName = 'barsOpen';
+        bar_thirst.style.animationName = 'barsOpen';
+        bar_hygiene.style.animationName = 'barsOpen';
+        mallow_icon.setAttribute("onclick", "clickStatus('close')");
+    }
+
+    if (func == 'close') {
+        foodicons_container.style.animationName = 'iconsAndPercentagesClose';
+        bar_container.style.animationName = 'barsIconContainerClose';
+        bar_food.style.animationName = 'barsClose';
+        bar_thirst.style.animationName = 'barsClose';
+        bar_hygiene.style.animationName = 'barsClose';
+        mallow_icon.setAttribute("onclick", "clickStatus('open')");
+    }
+    
+}
+
+
+// VOOR NICOLAS: IN DE TOEKOMST BEWERKEN
+// Functie om naar de interactiemodus te gaan
+function interactieStart(type) {
+    curtainDo('down');
+
+    knop_voeren.setAttribute("onclick", "");
+    knop_drinkengeven.setAttribute("onclick", "");
+
+    setTimeout(function () {
+        location_bar.style.display = 'none';
+
+        interactieomgevingtitel_container.style.display = 'block';
+        terug_button.style.display = 'flex';
+
+        mallow.setAttribute("onclick", "");
+        mallow.style.cursor = 'auto';
+
+        curtainDo('up');
+        itemAppear(`${type}`);
+    }, 3000);
+
+    setTimeout(function () {
+        knop_voeren.setAttribute("onclick", "itemAppear('voeren')");
+        knop_drinkengeven.setAttribute("onclick", "itemAppear('drinken_geven')");
+    }, 5000);
+
+}
+
+function itemAppear(type) {
+    if (item.style.display = 'none') {
+        item_img.src = `images/item_img/${type}.png`
+        item.style.display = 'block';
+        item.style.marginLeft = 'calc(50% - 100px)';
+        item.style.marginTop = '8%';
+        item.setAttribute("onclick", "itemDrag()");
+        item.className = `item ${type}`;
+    }
+}
+
+
+// Functie om de interactiemenu te verlaten
+// VOOR NICOLAS: IN DE TOEKOMST BEWERKEN
+function normalMode() {
+    curtainDo('down');
+
+    knop_voeren.setAttribute("onclick", "");
+    knop_drinkengeven.setAttribute("onclick", "");
+
+    setTimeout(function () {
+        knop_voeren.setAttribute("onclick", "interactieStart('voeren')");
+        knop_drinkengeven.setAttribute("onclick", "interactieStart('drinken_geven')");
+
+        location_bar.style.display = 'block';
+
+        interactieomgevingtitel_container.style.display = 'none';
+        terug_button.style.display = 'none';
+
+        mallow.setAttribute("onclick", "mallowPet()");
+        mallow.style.cursor = 'pointer';
+
+        item.style.display = 'none';
+
+        curtainDo('up');
+    }, 3000);
+
+    setTimeout(function () {
+        knop_voeren.setAttribute("onclick", "interactieStart('voeren')");
+        knop_drinkengeven.setAttribute("onclick", "interactieStart('drinken_geven')");
+    }, 5000);
 }

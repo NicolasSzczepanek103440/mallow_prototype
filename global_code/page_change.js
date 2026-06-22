@@ -2,21 +2,25 @@
 de pagina's te veranderen weergegeven. */
 
 function page_change(functie) { // Deze functie bepaalt welke pagina de gebruiker naartoe wordt gebracht
-    if (functie == 'spelen') {
-        window.alert("spelen");
+    curtainDo('down');
+
+    setInterval(function() {
+        if (functie == 'spelen') {
 
         window.location = "../living_room.html";
-    }
+        
+        }
 
-    if (functie == 'uitleg') {
-        window.alert("uitleg");
-    }
+        if (functie == 'uitleg') {
+            window.alert("uitleg");
+        }
 
-    if (functie == 'hoofdmenu') {
-        window.location = "main_menu.html";
-    }
+        if (functie == 'hoofdmenu') {
+            window.location = "main_menu.html";
+        }
 
-    if (functie == 'shop') {
-        window.location = "../shop.html";
-    }
+        if (functie == 'shop') {
+            window.location = "../shop.html";
+        }
+    }, 3000);
 }

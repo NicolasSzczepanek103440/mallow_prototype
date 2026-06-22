@@ -35,12 +35,12 @@ let shoptab = {
     kleren: {
         Shirt: {
             cost: 20,
-            playoerOwn: false
+            playerOwn: false
         },
 
         Pak: {
             cost: 20,
-            playoerOwn: false
+            playerOwn: false
         },
 
         objStatus: {
@@ -59,7 +59,6 @@ let shoptab = {
     }
 }
 
-
 let menu_container = document.getElementById("shop_selectitem");
 
 let mallowpreview_img = document.getElementById("mallow_previewimg");
@@ -70,12 +69,23 @@ let menu_insert = document.getElementById("item_container");
 let name_container = document.getElementById("name_container");
 let cost_container = document.getElementById("cost_container");
 
+let buy_button = document.querySelector('.buy_button');
+let equipButton = document.querySelector(".equip_button");
 let lock = document.getElementById("lock");
+
+// Functie om te vertonen hoe Mallo er uit ziet als gebruiker winkel binnengaat via de ricochet-systeem
+if (window.sessionStorage.mallowhoedenStorage != '' && window.sessionStorage.mallowhoedenStorage != null) {
+    mallowpreview_img.src = `images/hoeden/${window.sessionStorage.mallowhoedenStorage}.png`;
+}
+
+else {
+    mallowpreview_img.src = 'images/mallow_sprites/mallow_front.png'
+}
+
 
 // Functie voor het toevoegen van items binnen de item-menu
 function addItems(a) {
     for (let x in shoptab[a]) {
-
         let box = document.createElement("div");
         box.className = `itemselect item_unselected ${a} ${x}`;
         box.setAttribute("onclick", `selectItem('${a}', '${x}')`)
@@ -142,29 +152,130 @@ function closeShopTab(category) {
 
 // Functie voor het selecteren van items
 function selectItem(base, selectedItem) {
-    let buy_button = document.getElementById('buy_button');
+
+    let htmlCount = menu_insert.childElementCount;
+    console.log(htmlCount);
+
+    for (let x in shoptab[base]) {
+        let menu_item = document.querySelector(`.${x}`);
+
+        if (x == 'objStatus') {
+            break;
+        }
+
+        if (x == selectedItem) {
+            menu_item.className = `itemselect item_selected ${base} ${selectedItem}`
+            menu_item.setAttribute("onclick", `deSelectItem('${base}', '${selectedItem}')`);
+        }
+
+        else {
+            menu_item.className = `itemselect item_unselected ${base} ${x}`
+            menu_item.setAttribute("onclick", `selectItem('${base}', '${x}')`);
+        }
+    }
+
+    let selected = document.querySelector(`.${selectedItem}`);
+    selected.className = `itemselect item_selected ${base} ${selectedItem}`;
+
+    name_container.style.display = 'flex';
+    cost_container.style.display = 'flex';
+    equipButton.style.display = 'flex';
 
     // Data weergeven (naam, kosten en eigendom)
     name_container.innerHTML = selectedItem;
 
+    let testPlayerOwn = window.sessionStorage.playerownHoeden;
+
     if (shoptab[base][selectedItem]['cost'] == 'Gratis') {
         cost_container.innerHTML = 'Gratis';
 
-        buy_button.style.display = 'none';
-    }
-    else {
-        cost_container.innerHTML = `$${shoptab[base][selectedItem]['cost']}`;
-
-        buy_button.style.display = 'flex';
-    }
-
-    if (shoptab[base][selectedItem]['playerOwn'] == false) {
-        lock.style.display = 'block';
-    }
-    else {
         lock.style.display = 'none';
+        equipButton.setAttribute("onclick", `equipItem('${selectedItem}', '${base}')`);
+    }
+
+    else {
+        cost_container.innerHTML = `$${shoptab[base][selectedItem]['cost']}`; // STAY
+
+        if (window.sessionStorage.playerownHoeden.includes(selectedItem) == false) {
+            equipButton.className = `equip_button lock_equip`;
+            buy_button.style.display = 'flex';
+            lock.style.display = 'block';
+        }
+
+        else {
+            equipButton.className = `equip_button ${base} ${selectedItem}`;
+            buy_button.style.display = 'none';
+            lock.style.display = 'none';
+        }
+
+
+        buy_button.setAttribute("onclick", `buyItem('${selectedItem}', '${base}')`)
     }
 
     mallowpreview_img.src = `images/${base}/${selectedItem}.png`
 
 }
+
+function deSelectItem(base, selectedItem) {
+    name_container.style.display = 'none';
+    cost_container.style.display = 'none';
+    equipButton.style.display = 'none';
+    buy_button.style.display = 'none';
+
+    for (let x in shoptab[base]) {
+        let menu_item = document.querySelector(`.${x}`);
+
+        if (x == 'objStatus') {
+            break;
+        }
+
+        if (x == selectedItem) {
+            menu_item.className = `itemselect item_unselected ${base} ${selectedItem}`
+            menu_item.setAttribute("onclick", `selectItem('${base}', '${selectedItem}')`);
+        }
+
+        else {
+            menu_item.className = `itemselect item_unselected ${base} ${x}`
+            menu_item.setAttribute("onclick", `selectItem('${base}', '${x}')`);
+        }
+    }
+
+    if (window.sessionStorage.mallowhoedenStorage != '' && window.sessionStorage.mallowhoedenStorage != null && window.sessionStorage.mallowhoedenStorage != undefined) {
+        mallowpreview_img.src = `images/${base}/${window.sessionStorage.mallowhoedenStorage}.png`
+        console.log(mallowpreview_img.src);
+    }
+
+    else {
+        mallowpreview_img.src = 'images/mallow_sprites/mallow_front.png';
+    }
+}
+
+
+// Functie voor het kopen van items
+// VOOR NICOLAS: BEWERKEN IN DE TOEKOMST
+function buyItem(item, base) {
+    shoptab[base][item].playerOwn = true;
+    lock.style.display = 'none';
+    buy_button.style.display = 'none';
+
+    if (base == 'hoeden') { // DIT BEWERKEN OOK!!
+        if (window.sessionStorage.playerownHoeden.includes(item) == false) {
+            window.sessionStorage.playerownHoeden += `${item}`;
+        }
+    }
+    
+    // MISSCHIEN BEWERKEN NAAR ANDERE FUNCTIE
+    equipButton.setAttribute("onclick", `equipItem('${item}', '${base}')`);
+}
+
+// Functie voor het aandoen van items
+function equipItem(item, base) {
+    if (base == 'hoeden') {
+        if (window.sessionStorage.playerownHoeden.includes(`${item}`)) {
+            window.sessionStorage.mallowhoedenStorage = '';
+            window.sessionStorage.mallowhoedenStorage = `${item}`;
+        }
+        
+        console.log(window.sessionStorage.mallowhoedenStorage);
+    }
+};
