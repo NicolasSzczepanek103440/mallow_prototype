@@ -5,9 +5,8 @@ function page_change(functie) { // Deze functie bepaalt welke pagina de gebruike
     curtainDo('down');
 
     setInterval(function() {
-        if (functie == 'spelen') {
-
-        window.location = "../living_room.html";
+        if (functie == 'living_room') {
+            window.location = "../living_room.html";
         
         }
 

@@ -1,90 +1,22 @@
-/* Hier staan alle belangrijke functies zowel als andere dingen die belangrijk kunnen zijn voor deze functies (zoals arrays en objecten). 
-Hieraan kunt u denken aan de uitklapmenu's, de boombox en nog meer. Dit geldt voor alle pagina's. */
+/* Hier staan alle belangrijke functies zowel als andere dingen die belangrijk kunnen zijn voor deze functies (zoals arrays en objecten). */
 
-// Objecten voor de lijst met liedjes met zijn artiesten en albumcovers
 
-let songs_and_artists = {
-    "catface": {
-        Name: ":3",
-        Artist: "Tanger",
-        Album: "images/albumcover_catface.jpeg",
-        Artist_Pfp: "images/tanger_pfp.jpeg",
+// Objecten voor de soorten knoppen voor interactie die er zijn
+let knoppen_interactie = {
+    woonkamer: {
+        voeren: {
+            naam: "Voeren"
+        },
 
-        Album_Song: "music_catface_tanger.mp3",
-
-        id: 1
+        drinken_geven: {
+            naam: "Drinken geven"
+        }
     },
 
-    "IdRatherBeThereWithYou": {
-        Name: "I'd Rather Be There With You",
-        Artist: "Lil Kemi",
-        Album: "images/lilkemi_pfp.jpeg",
-        Artist_Pfp: "images/lilkemi_pfp.jpeg",
-
-
-        Album_Song: "music_idratherbetherewithyou_lilkemi.mp3",
-
-        id: 2
-    },
-
-    "AloneIknow": {
-        Name: "Alone I know",
-        Artist: "Lil Kemi",
-        Album: "images/aloneiknow_album.jpg",
-        Artist_Pfp: "images/lilkemi_pfp.jpeg",
-
-
-        Album_Song: "music_aloneiknow_lilkemi.mp3",
-
-        id: 3
-    },
-
-    "anywhereyouare": {
-        Name: "Anywhere You Are!",
-        Artist: "Lil Kemi",
-        Album: "images/lilkemi_pfp.jpeg",
-        Artist_Pfp: "images/lilkemi_pfp.jpeg",
-
-
-        Album_Song: "music_anywhereyouare_lilkemi.mp3",
-
-        id: 4
-    },
-
-    "dancingaroundincirclesuntilmylittlefeetfalloff": {
-        Name: "dancing around in circles until my little feet fall off",
-        Artist: 'spellcasting',
-        Album: 'images/albumcover_dancingaroundincirclesuntilmylittlefeetfalloff.jpeg',
-        Artist_Pfp: "images/spellcasting_pfp.jpg",
-
-
-        Album_Song: "music_dancingaroundincirclesuntilmylittlefeetfalloff_spellcasting.mp3",
-
-        id: 5
-    },
-
-    "songformylostghostfriends": {
-        Name: "song for my lost ghost friends",
-        Artist: 'spellcasting',
-        Album: 'images/albumcover_songformylostghostfriends.jpeg',
-        Artist_Pfp: "images/spellcasting_pfp.jpg",
-
-
-        Album_Song: "music_songformylostghostfriends_spellcasting.mp3",
-
-        id: 6
-    },
-
-    "Hero": {
-        Name: "Hero",
-        Artist: "Meego",
-        Album: 'images/albumcover_meero.jpeg',
-        Artist_Pfp: "images/meego_pfp.jpeg",
-
-
-        Album_Song: "music_hero_meego.mp3",
-
-        id: 7
+    badkamer: {
+        schrobben: {
+            naam: "Schrobben"
+        }
     }
 }
 
@@ -94,8 +26,8 @@ let terug_button = document.querySelector(".terug_button");
 let interaction_bar = document.querySelector(".playbar_container");
 let side_bar = document.querySelector(".playbar_container");
 let arrow_sidebar = document.querySelector(".arrow_playerbar");
-let knop_voeren = document.querySelector('.voeren');
-let knop_drinkengeven = document.querySelector('.drinken_geven');
+
+let interactiebar_buttoncontainer = document.querySelector(".play_bar");
 
 let location_bar = document.querySelector(".arrowcontainer_locationbar");
 let arrow_topbar = document.querySelector(".arrow_locationbar");
@@ -103,15 +35,7 @@ let arrow_topbar = document.querySelector(".arrow_locationbar");
 
 let top_bar = document.querySelector(".locationbar_container");
 
-let boombox_container = document.querySelector(".boombox_container");
-let boombox_move = document.querySelector(".boombox_move");
-let boombox = document.querySelector(".boombox");
-let boombox_touch = document.querySelector(".boombox_touch");
-let boombox_openmenu = document.querySelector(".boombox_openmenu");
-let songselect_menu = document.querySelector(".songselect_menu");
-let selecteerlied_knop = document.querySelector('.song_select');
-
-// functie voor het openen/dichtklappen van tabs (zoals de spelen tab en locatie tab)
+// functie voor het openen/dichtklappen van tabs (zoals de interactie- en locatietab)
 function tab_show(type_tab) {
 
     /* spelen bar openen/dichtdoen */
@@ -119,6 +43,7 @@ function tab_show(type_tab) {
         side_bar.style.animationName = "sidebar_move1";
         setTimeout(function() {
             arrow_sidebar.setAttribute("onclick", "tab_show('side_bar2')");
+            
         },
             1000)
         }
@@ -154,241 +79,53 @@ function tab_show(type_tab) {
 
 }
 
-// Functie voor het bewegen van de boombox
-
-centerBoomBox = function(mouse) {
-    boombox_container.style.marginLeft = `${mouse.clientX - 275}px`;
-    boombox_container.style.marginTop = `${mouse.clientY - 27.5}px`;
-}
-
-function boomboxMove(status){
-
-    if (status == true) {
-        window.addEventListener("mousemove", centerBoomBox);
-        boombox_move.setAttribute("onclick", "boomboxMove(false)");
-    }
-
-    if (status == false) {
-        window.removeEventListener("mousemove", centerBoomBox);
-        boombox_move.setAttribute("onclick", "boomboxMove(true)");
-    }
-
-    
-
-    
-}
-
-
-// Functie voor het openen/dichtklappen van boomboxmenu
-function boomboxOpen(status) {
-    let album_show = document.querySelector(".album_img");
-    let artist_show = document.querySelector(".artist_img")
-
-    if (status == 'open') {
-        boombox_openmenu.style.display = "flex";
-        boombox_touch.setAttribute("onclick", "boomboxOpen('close')");
-    }
-
-    if (status == 'close') {
-        boombox_openmenu.style.display = 'none';
-        boombox_touch.setAttribute("onclick", "boomboxOpen('open')");
-        songselect_menu.style.display = 'none';
-        selecteerlied_knop.setAttribute("onclick", "selecteerLied('open')")
-    }
-}
-
-// Functie voor het openen van het menu waarin je kunt kiezen wat voor liedje je wilt
-function selecteerLied(status) {
-    if (status == 'open') {
-            songselect_menu.style.display = 'flex';
-            selecteerlied_knop.setAttribute("onclick", "selecteerLied('close')");
-        }
-
-        if (status == 'close') {
-            songselect_menu.style.display = 'none';
-            selecteerlied_knop.setAttribute("onclick", "selecteerLied('open')")
+// Functie voor het toevoegen van interactie binnen de interactie-tab
+    for (let x in knoppen_interactie) {
+        console.log(x);
+        if (interactiebar_buttoncontainer.className == `play_bar ${x}`) {
+            insertInteractionButtons(`${x}`);
         }
     }
 
-// Deze functie wordt gebruikt om alle juiste informatie binnen de liedselectie te plaatsen.
-for (let x in songs_and_artists) {
-    let song_list = document.querySelector(".songselect_menu"); // Hier komen de selectie liedjes te staan
+function insertInteractionButtons(element) {
 
-    let song_box = document.createElement("div"); // Dit wordt uiteindelijk de lied die je kunt selecteren
-    song_box.className += 'songselect_song';
-    song_box.id = x;
-    song_box.setAttribute('onclick', `songChange('${x}')`);
-
-    let song1 = document.createElement("div") // Liednaam
-    song1.className += 'songselectsong_name';
-    song1.innerHTML = songs_and_artists[x]['Name'];
+    console.log(element);
     
-    let artist_name = document.createElement('div'); // Artiest naam
-    artist_name.className += 'songselectsong_album';
-    artist_name.innerHTML = songs_and_artists[x]['Artist'];
+    for (let y in knoppen_interactie[element]) {
 
-    let albumPhoto = document.createElement("div"); // Weergeving album
-    albumPhoto.className += 'album_cover';
+        let box_interact = document.createElement("div");
+        box_interact.className = `playbar_option ${y}`;
+        box_interact.setAttribute("onclick", `interactieStart('${element}', '${y}')`);
 
-    let albumPhoto_foto = document.createElement("img");
-    albumPhoto.appendChild(albumPhoto_foto);
-    albumPhoto_foto.src = songs_and_artists[x]["Album"];
+        boxinteract_text = document.createElement("span");
+        boxinteract_text.innerHTML = `${knoppen_interactie[element][y]['naam']}`;
 
-    let artistPfp = document.createElement("div"); // Foto/pfp van de artiest
-    artistPfp.className = "pfp_artist";
+        box_interact.appendChild(boxinteract_text);
+        interactiebar_buttoncontainer.appendChild(box_interact);
 
-    let artistPfp_foto = document.createElement("img");
-    artistPfp.appendChild(artistPfp_foto);
-    artistPfp_foto.src = songs_and_artists[x]["Artist_Pfp"];
-
-    let clickToSelect = document.createElement("div"); // knop die liedjes selecteert
-    clickToSelect.className += 'click_to_select unselected';
-    clickToSelect.id = `click_to_select_${x}`;
-
-    song_list.appendChild(song_box);
-    song_box.appendChild(song1);
-    song_box.appendChild(artist_name);
-    song_box.appendChild(albumPhoto);
-    song_box.appendChild(artistPfp);
-    song_box.appendChild(clickToSelect);
-}
-
-// Deze functie wordt gebruikt om liedjes te veranderen vanuit de boombox
-function songChange(status) {
-    let audio = document.querySelector('audio');
-    let controls_box = document.querySelector('.controls_box');
-    controls_box.removeChild(audio);
-
-    for (let x in songs_and_artists) {
-        let nowplaying = document.querySelector(".song_and_artist");
-
-        let click_to_select = document.getElementById(`click_to_select_${x}`);
-        click_to_select.className = 'click_to_select unselected';
-
-        if (status == x) {
-            let click_to_selectSELECTED = document.getElementById(`click_to_select_${status}`);
-            click_to_selectSELECTED.className = 'click_to_select selected';
-
-            let album_show = document.querySelector(".album_img");
-            let artist_show = document.querySelector(".artist_img")
-
-            artist_show.src = songs_and_artists[x]["Artist_Pfp"];
-            album_show.src = songs_and_artists[x]["Album"];
-            nowplaying.innerHTML = `Now playing: <b>${songs_and_artists[x]["Artist"]},<br>${songs_and_artists[x]["Name"]}</b>`
-            
-
-            let song_select = songs_and_artists[x]["Album_Song"]
-            let newAudio = document.createElement('audio');
-
-            if (audio.loop == true) {
-                newAudio.loop = true;
-            }
-
-            else {
-                newAudio.loop = false;
-            }
-
-            newAudio.controls = true;
-            newAudio.autoplay = true;
-            controls_box.appendChild(newAudio);
-            newAudio.innerHTML = `<source src='sounds/${song_select}' type='audio/mp3'>`
-        }
     }
 }
-
-// Functie dat gebruikt wordt om automatisch andere liedjes aan te zetten tijdens het luisteren
-var songEye = setInterval(function() {
-    let currentTime = Math.floor(document.querySelector("audio").currentTime);
-    let duration = Math.floor(document.querySelector("audio").duration);
-
-    if (currentTime == duration ) {
-        let audio = document.querySelector("audio");
-        let selected = document.querySelector(".selected");
-        let selectedElement = selected.parentElement.id;
-
-        for (let x in songs_and_artists) {
-            if (x == selectedElement && audio.loop == true) {
-                console.log("Loop staat aan. Kan niet verder.");
-            }
-
-            if (x == selectedElement && audio.loop != true) {
-                let id = songs_and_artists[x]["id"];
-                for (let y in songs_and_artists) {
-                    if (songs_and_artists[y]["id"] == id + 1) {
-                        songChange(y);
-                    }
-
-                    if (id == Object.keys(songs_and_artists).length) {
-                        if (songs_and_artists[y]["id"] == 1) {
-                            songChange(y);
-                        }
-                    }
-                }
-            }
-
-
-        }
-    }
-}, 1);
-
-// Functie van het aan- en uitzetten van de loop functie (voor liedjes)
-function loop(status) {
-    let audio = document.querySelector("audio");
-    let HTML_element = document.querySelector(".loop_music");
-
-    if (status == 'true') {
-        HTML_element.setAttribute("onclick", "loop('false')");
-        audio.loop = true;
-    }
-
-    if (status == 'false') {
-        HTML_element.setAttribute("onclick", "loop('true')");
-        audio.loop = false;
-    }
-    
-}
-
-// Functies voor het uitklappen en dichtklappen van de statusmenu
-let mallow_icon = document.querySelector(".mallow_icon");
-let foodicons_container = document.querySelector(".percentages_en_icoontjes");
-let bar_container = document.querySelector(".bars");
-let bar_food = document.querySelector(".food").parentElement;
-let bar_thirst = document.querySelector(".thirst").parentElement;
-let bar_hygiene = document.querySelector(".hygiene").parentElement;
-
-function clickStatus(func) {
-
-    if (func == 'open') {
-        foodicons_container.style.animationName = 'iconsAndPercentagesOpen';
-        bar_container.style.animationName = 'barsIconContainerOpen';
-        bar_food.style.animationName = 'barsOpen';
-        bar_thirst.style.animationName = 'barsOpen';
-        bar_hygiene.style.animationName = 'barsOpen';
-        mallow_icon.setAttribute("onclick", "clickStatus('close')");
-    }
-
-    if (func == 'close') {
-        foodicons_container.style.animationName = 'iconsAndPercentagesClose';
-        bar_container.style.animationName = 'barsIconContainerClose';
-        bar_food.style.animationName = 'barsClose';
-        bar_thirst.style.animationName = 'barsClose';
-        bar_hygiene.style.animationName = 'barsClose';
-        mallow_icon.setAttribute("onclick", "clickStatus('open')");
-    }
-    
-}
-
 
 // VOOR NICOLAS: IN DE TOEKOMST BEWERKEN
 // Functie om naar de interactiemodus te gaan
-function interactieStart(type) {
+function interactieStart(in_element, type) {
+    console.log(in_element);
+    console.log(type);
+
     curtainDo('down');
 
-    knop_voeren.setAttribute("onclick", "");
-    knop_drinkengeven.setAttribute("onclick", "");
+    for (let x in knoppen_interactie[in_element]) {
+        
+        let button = document.querySelector(`.${x}`);
+        button.setAttribute("onclick", '');
+
+        setInterval(function() {
+            button.setAttribute("onclick", `itemAppear('${x}')`);
+        }, 5000);
+    }
 
     setTimeout(function () {
-        location_bar.style.display = 'none';
+        top_bar.style.display = 'none';
 
         interactieomgevingtitel_container.style.display = 'block';
         terug_button.style.display = 'flex';
@@ -396,14 +133,11 @@ function interactieStart(type) {
         mallow.setAttribute("onclick", "");
         mallow.style.cursor = 'auto';
 
+        terug_button.setAttribute("onclick", `normalMode('${in_element}', '${type}')`)
+
         curtainDo('up');
         itemAppear(`${type}`);
     }, 3000);
-
-    setTimeout(function () {
-        knop_voeren.setAttribute("onclick", "itemAppear('voeren')");
-        knop_drinkengeven.setAttribute("onclick", "itemAppear('drinken_geven')");
-    }, 5000);
 
 }
 
@@ -421,31 +155,33 @@ function itemAppear(type) {
 
 // Functie om de interactiemenu te verlaten
 // VOOR NICOLAS: IN DE TOEKOMST BEWERKEN
-function normalMode() {
+function normalMode(in_element, type) {
     curtainDo('down');
 
-    knop_voeren.setAttribute("onclick", "");
-    knop_drinkengeven.setAttribute("onclick", "");
+    for (let x in knoppen_interactie[in_element][type]) {
+        let button = document.querySelector(`.${type}`);
 
-    setTimeout(function () {
-        knop_voeren.setAttribute("onclick", "interactieStart('voeren')");
-        knop_drinkengeven.setAttribute("onclick", "interactieStart('drinken_geven')");
+        button.setAttribute("onclick", `interactieStart('${in_element}', '${type}'`);
+    
+        setTimeout(function () {
+            button.setAttribute("onclick", "");
 
-        location_bar.style.display = 'block';
+            top_bar.style.display = 'flex';
 
-        interactieomgevingtitel_container.style.display = 'none';
-        terug_button.style.display = 'none';
+            interactieomgevingtitel_container.style.display = 'none';
+            terug_button.style.display = 'none';
 
-        mallow.setAttribute("onclick", "mallowPet()");
-        mallow.style.cursor = 'pointer';
+            mallow.setAttribute("onclick", "mallowPet()");
+            mallow.style.cursor = 'pointer';
 
-        item.style.display = 'none';
+            item.style.display = 'none';
 
-        curtainDo('up');
-    }, 3000);
-
-    setTimeout(function () {
-        knop_voeren.setAttribute("onclick", "interactieStart('voeren')");
-        knop_drinkengeven.setAttribute("onclick", "interactieStart('drinken_geven')");
-    }, 5000);
+            curtainDo('up');
+        }, 3000);
+    
+        setTimeout(function () {
+            button.setAttribute("onclick", `interactieStart('${in_element}', '${type}')`);
+        }, 5000);
 }
+    
+    }

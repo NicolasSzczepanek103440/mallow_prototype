@@ -2,26 +2,29 @@
 
 let geld_container = document.querySelector(".howmuchcash_container");
 let geld_onclick = document.querySelector(".cash_show");
+let geld_amount = document.querySelector(".cash_amount");
 
-window.sessionStorage.geld = 0;
-let geldAmount = window.sessionStorage.geld
+let coin_container = document.querySelector(".coin_container");
+
+// Dit zorgt ervoor dat de hoeveelheid geld een nummer blijft.
+let geldamount_Data = Number(window.sessionStorage.playerCoins);
+
+// Data munten weergeven aan gebruiker
+if (window.sessionStorage.playerCoins != '' || window.sessionStorage.playerCoins != null || window.sessionStorage.playerCoins != undefined) { // Hoeveel munten de gebruiker heeft
+    geld_amount.innerHTML = `$${window.sessionStorage.playerCoins}`;
+}
 
 // Geld weergave vertonen en verstoppen
 function cashShow(status) {
-
     if (status == 'hide') {
         geld_container.style.animationName = 'hideCash';
 
-        setInterval(function() {
-            geld_onclick.setAttribute("onclick", "cashShow('show')");
-        }, 1000);
+        geld_onclick.setAttribute("onclick", "cashShow('show')");
     }
 
     if (status == 'show') {
         geld_container.style.animationName = 'showCash';
 
-        setInterval(function() {
-            geld_onclick.setAttribute("onclick", "cashShow('hide')");
-        }, 1000);
+        geld_onclick.setAttribute("onclick", "cashShow('hide')");
     }
 }

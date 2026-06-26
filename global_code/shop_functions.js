@@ -48,16 +48,27 @@ let shoptab = {
         }
     },
 
-    achtergronden: {
-        a: "",
-        b: "",
-        c: "",
-        d: "",
-        e: "",
-        f: "",
-        g: ""
-    }
+    /* achtergronden: {
+        "Sakura": {
+            cost: "Gratis"
+        },
+
+        Chocola: {
+            cost: "Gratis"
+        },
+
+        Vanille: {
+            cost: "Gratis"
+        },
+
+        objStatus: {
+            name: 'achtergronden'
+        }
+        
+    } */
 }
+
+let body = document.querySelector("body");
 
 let menu_container = document.getElementById("shop_selectitem");
 
@@ -73,15 +84,24 @@ let buy_button = document.querySelector('.buy_button');
 let equipButton = document.querySelector(".equip_button");
 let lock = document.getElementById("lock");
 
+let resetcostumes_button = document.getElementById("reset_costumes");
+
 // Functie om te vertonen hoe Mallo er uit ziet als gebruiker winkel binnengaat via de ricochet-systeem
+
 if (window.sessionStorage.mallowhoedenStorage != '' && window.sessionStorage.mallowhoedenStorage != null) {
     mallowpreview_img.src = `images/hoeden/${window.sessionStorage.mallowhoedenStorage}.png`;
+    resetcostumes_button.style.display = 'flex';
+}
+
+else if (window.sessionStorage.mallowklerenStorage != '' && window.sessionStorage.mallowklerenStorage != null) {
+    mallowpreview_img.src = `images/kleren/${window.sessionStorage.mallowklerenStorage}.png`;
+    resetcostumes_button.style.display = 'flex';
 }
 
 else {
     mallowpreview_img.src = 'images/mallow_sprites/mallow_front.png'
+    resetcostumes_button.style.display = 'none';
 }
-
 
 // Functie voor het toevoegen van items binnen de item-menu
 function addItems(a) {
@@ -95,6 +115,10 @@ function addItems(a) {
 
         menu_insert.appendChild(box);
         box.appendChild(box_img);
+
+        if (a == 'achtergronden') {
+            box_img.style.border = '2px solid black';
+        }
 
     }
 
@@ -132,7 +156,9 @@ function openShopTab(category) {
 
     let button = document.querySelector(`.${category}`);
     button.setAttribute("onclick", `closeShopTab('${category}')`);
-    button.className = `select ${category} category_selected`;
+    button.className = `select ${category} category_selected${window.sessionStorage.mallowachtergrondenStorage}`;
+
+    
 }
 
 // Functie voor het sluiten van de item-menu
@@ -141,20 +167,33 @@ function closeShopTab(category) {
 
     removeItems();
     menu_items.style.display = 'none';
+    
+    name_container.style.display = 'none';
+    cost_container.style.display = 'none';
+    equipButton.style.display = 'none';
+    buy_button.style.display = 'none';
 
     let button = document.querySelector(`.${category}`);
     button.setAttribute("onclick", `openShopTab('${category}')`);
     button.className = `select ${category} category_unselected`;
+
+    if (window.sessionStorage[`mallow${category}Storage`] != '' && window.sessionStorage[`mallow${category}Storage`] != null && window.sessionStorage[`mallow${category}Storage`] != undefined) {
+        mallowpreview_img.src = `images/${category}/${window.sessionStorage[`mallow${category}Storage`]}.png`
+        console.log(mallowpreview_img.src);
+    }
+
+    else {
+        mallowpreview_img.src = 'images/mallow_sprites/mallow_front.png';
+    }
 }
 
 
 
 
 // Functie voor het selecteren van items
+// BEWERKEN
 function selectItem(base, selectedItem) {
-
     let htmlCount = menu_insert.childElementCount;
-    console.log(htmlCount);
 
     for (let x in shoptab[base]) {
         let menu_item = document.querySelector(`.${x}`);
@@ -181,38 +220,61 @@ function selectItem(base, selectedItem) {
     cost_container.style.display = 'flex';
     equipButton.style.display = 'flex';
 
-    // Data weergeven (naam, kosten en eigendom)
-    name_container.innerHTML = selectedItem;
-
-    let testPlayerOwn = window.sessionStorage.playerownHoeden;
-
-    if (shoptab[base][selectedItem]['cost'] == 'Gratis') {
-        cost_container.innerHTML = 'Gratis';
-
-        lock.style.display = 'none';
-        equipButton.setAttribute("onclick", `equipItem('${selectedItem}', '${base}')`);
+    if (selectedItem == 'Sakura') {
+        name_container.innerHTML = "Sakura Mochi";
+    }
+    else {
+        name_container.innerHTML = selectedItem;
     }
 
-    else {
-        cost_container.innerHTML = `$${shoptab[base][selectedItem]['cost']}`; // STAY
+    if (shoptab[base][selectedItem]['cost'] == 'Gratis') {
 
-        if (window.sessionStorage.playerownHoeden.includes(selectedItem) == false) {
+        cost_container.innerHTML = 'Gratis';
+
+        if (window.sessionStorage[`playerown${base}`].includes(selectedItem) == false) {
             equipButton.className = `equip_button lock_equip`;
             buy_button.style.display = 'flex';
+            buy_button.setAttribute("onclick", `buyItem('${selectedItem}', '${base}')`);
             lock.style.display = 'block';
+            equipButton.setAttribute("onclick", "");
         }
 
         else {
             equipButton.className = `equip_button ${base} ${selectedItem}`;
             buy_button.style.display = 'none';
             lock.style.display = 'none';
+            equipButton.setAttribute("onclick", `equipItem('${selectedItem}', '${base}')`);
         }
-
-
-        buy_button.setAttribute("onclick", `buyItem('${selectedItem}', '${base}')`)
     }
 
-    mallowpreview_img.src = `images/${base}/${selectedItem}.png`
+    else {
+        cost_container.innerHTML = `$${shoptab[base][selectedItem]['cost']}`;
+
+        if (window.sessionStorage[`playerown${base}`].includes(selectedItem) == false) {
+            equipButton.className = `equip_button lock_equip`;
+            buy_button.style.display = 'flex';
+            buy_button.setAttribute("onclick", `buyItem('${selectedItem}', '${base}')`);
+            lock.style.display = 'block';
+            equipButton.setAttribute("onclick", "");
+        }
+
+        else {
+            equipButton.className = `equip_button ${base} ${selectedItem}`;
+            buy_button.style.display = 'none';
+            lock.style.display = 'none';
+            equipButton.setAttribute("onclick", `equipItem('${selectedItem}', '${base}')`);
+        }
+    }
+
+    if (base != 'achtergronden') {
+        mallowpreview_img.src = `images/${base}/${selectedItem}.png`
+    }
+
+    else {
+        changeBackground(`'${selectedItem}'`);
+    }
+
+    
 
 }
 
@@ -240,8 +302,8 @@ function deSelectItem(base, selectedItem) {
         }
     }
 
-    if (window.sessionStorage.mallowhoedenStorage != '' && window.sessionStorage.mallowhoedenStorage != null && window.sessionStorage.mallowhoedenStorage != undefined) {
-        mallowpreview_img.src = `images/${base}/${window.sessionStorage.mallowhoedenStorage}.png`
+    if (window.sessionStorage[`mallow${base}Storage`] != '' && window.sessionStorage[`mallow${base}Storage`] != null && window.sessionStorage[`mallow${base}Storage`] != undefined) {
+        mallowpreview_img.src = `images/${base}/${window.sessionStorage[`mallow${base}Storage`]}.png`
         console.log(mallowpreview_img.src);
     }
 
@@ -250,32 +312,82 @@ function deSelectItem(base, selectedItem) {
     }
 }
 
+function changeBackground(name) {
+    if (name == 'Chocola') {
+        window.alert("bomboclat");
+    }
+}
+
 
 // Functie voor het kopen van items
 // VOOR NICOLAS: BEWERKEN IN DE TOEKOMST
 function buyItem(item, base) {
-    shoptab[base][item].playerOwn = true;
-    lock.style.display = 'none';
-    buy_button.style.display = 'none';
+    console.log(shoptab[base][item]['cost']);
+    console.log(geldamount_Data);
 
-    if (base == 'hoeden') { // DIT BEWERKEN OOK!!
-        if (window.sessionStorage.playerownHoeden.includes(item) == false) {
-            window.sessionStorage.playerownHoeden += `${item}`;
+    if (geldamount_Data >= shoptab[base][item]['cost'] || shoptab[base][item]['cost'] == 'Gratis') {
+        lock.style.display = 'none';
+        buy_button.style.display = 'none';
+
+        equipButton.setAttribute("onclick", `equipItem('${item}', '${base}')`);
+        equipButton.className = "equip_button"
+        lock.style.display = 'none';
+
+        if (window.sessionStorage[`playerown${base}`].includes(item) == false) {
+            window.sessionStorage[`playerown${base}`] += `${item}`;
         }
+
+        if (shoptab[base][item]['cost'] == 'Gratis') {
+            window.sessionStorage.playerCoins = geldamount_Data;
+            geld_amount.innerHTML = `$${window.sessionStorage.playerCoins}`;
+        }
+
+        else {
+            geldamount_Data = geldamount_Data - shoptab[base][item]['cost'];
+            window.sessionStorage.playerCoins = geldamount_Data;
+            geld_amount.innerHTML = `$${window.sessionStorage.playerCoins}`;
+
+            if (geldamount_Data <= 0) {
+                geldamount_Data = 0;
+            } 
+        }
+
+        
+        
+        
+        let buy_sound = document.createElement("audio");
+        buy_sound.src = '../sounds/shop/buy_soundeffect.mp3';
+        buy_sound.autoplay = 'true';
+
+        body.appendChild(buy_sound);
+        
+        setTimeout(function() {
+            body.removeChild(buy_sound);
+        }, 3000);
+    }
+
+    else {
+        window.alert("niet genoeg");
     }
     
-    // MISSCHIEN BEWERKEN NAAR ANDERE FUNCTIE
-    equipButton.setAttribute("onclick", `equipItem('${item}', '${base}')`);
 }
 
 // Functie voor het aandoen van items
 function equipItem(item, base) {
-    if (base == 'hoeden') {
-        if (window.sessionStorage.playerownHoeden.includes(`${item}`)) {
-            window.sessionStorage.mallowhoedenStorage = '';
-            window.sessionStorage.mallowhoedenStorage = `${item}`;
-        }
-        
-        console.log(window.sessionStorage.mallowhoedenStorage);
+    if (window.sessionStorage[`playerown${base}`].includes(`${item}`)) {
+        window.sessionStorage[`mallow${base}Storage`] = '';
+        window.sessionStorage[`mallow${base}Storage`] = `${item}`;
+
+        resetcostumes_button.style.display = 'flex';
     }
 };
+
+// Reseteert Mallo terug naar zonder kleding
+function resetMallowCostume() {
+    window.sessionStorage.mallowhoedenStorage = ''
+    window.sessionStorage.mallowklerenStorage = ''
+
+    mallowpreview_img.src = 'images/mallow_sprites/mallow_front.png';
+
+    resetcostumes_button.style.display = 'none';
+}
