@@ -88,13 +88,13 @@ let resetcostumes_button = document.getElementById("reset_costumes");
 
 // Functie om te vertonen hoe Mallo er uit ziet als gebruiker winkel binnengaat via de ricochet-systeem
 
-if (window.sessionStorage.mallowhoedenStorage != '' && window.sessionStorage.mallowhoedenStorage != null) {
-    mallowpreview_img.src = `images/hoeden/${window.sessionStorage.mallowhoedenStorage}.png`;
+if (window.localStorage.mallowhoedenStorage != '' && window.localStorage.mallowhoedenStorage != null) {
+    mallowpreview_img.src = `images/hoeden/${window.localStorage.mallowhoedenStorage}.png`;
     resetcostumes_button.style.display = 'flex';
 }
 
-else if (window.sessionStorage.mallowklerenStorage != '' && window.sessionStorage.mallowklerenStorage != null) {
-    mallowpreview_img.src = `images/kleren/${window.sessionStorage.mallowklerenStorage}.png`;
+else if (window.localStorage.mallowklerenStorage != '' && window.localStorage.mallowklerenStorage != null) {
+    mallowpreview_img.src = `images/kleren/${window.localStorage.mallowklerenStorage}.png`;
     resetcostumes_button.style.display = 'flex';
 }
 
@@ -156,7 +156,7 @@ function openShopTab(category) {
 
     let button = document.querySelector(`.${category}`);
     button.setAttribute("onclick", `closeShopTab('${category}')`);
-    button.className = `select ${category} category_selected${window.sessionStorage.mallowachtergrondenStorage}`;
+    button.className = `select ${category} category_selected`;
 
     
 }
@@ -177,8 +177,8 @@ function closeShopTab(category) {
     button.setAttribute("onclick", `openShopTab('${category}')`);
     button.className = `select ${category} category_unselected`;
 
-    if (window.sessionStorage[`mallow${category}Storage`] != '' && window.sessionStorage[`mallow${category}Storage`] != null && window.sessionStorage[`mallow${category}Storage`] != undefined) {
-        mallowpreview_img.src = `images/${category}/${window.sessionStorage[`mallow${category}Storage`]}.png`
+    if (window.localStorage[`mallow${category}Storage`] != '' && window.localStorage[`mallow${category}Storage`] != null && window.localStorage[`mallow${category}Storage`] != undefined) {
+        mallowpreview_img.src = `images/${category}/${window.localStorage[`mallow${category}Storage`]}.png`
         console.log(mallowpreview_img.src);
     }
 
@@ -231,7 +231,7 @@ function selectItem(base, selectedItem) {
 
         cost_container.innerHTML = 'Gratis';
 
-        if (window.sessionStorage[`playerown${base}`].includes(selectedItem) == false) {
+        if (window.localStorage[`playerown${base}`].includes(selectedItem) == false) {
             equipButton.className = `equip_button lock_equip`;
             buy_button.style.display = 'flex';
             buy_button.setAttribute("onclick", `buyItem('${selectedItem}', '${base}')`);
@@ -250,7 +250,7 @@ function selectItem(base, selectedItem) {
     else {
         cost_container.innerHTML = `$${shoptab[base][selectedItem]['cost']}`;
 
-        if (window.sessionStorage[`playerown${base}`].includes(selectedItem) == false) {
+        if (window.localStorage[`playerown${base}`].includes(selectedItem) == false) {
             equipButton.className = `equip_button lock_equip`;
             buy_button.style.display = 'flex';
             buy_button.setAttribute("onclick", `buyItem('${selectedItem}', '${base}')`);
@@ -302,8 +302,8 @@ function deSelectItem(base, selectedItem) {
         }
     }
 
-    if (window.sessionStorage[`mallow${base}Storage`] != '' && window.sessionStorage[`mallow${base}Storage`] != null && window.sessionStorage[`mallow${base}Storage`] != undefined) {
-        mallowpreview_img.src = `images/${base}/${window.sessionStorage[`mallow${base}Storage`]}.png`
+    if (window.localStorage[`mallow${base}Storage`] != '' && window.localStorage[`mallow${base}Storage`] != null && window.localStorage[`mallow${base}Storage`] != undefined) {
+        mallowpreview_img.src = `images/${base}/${window.localStorage[`mallow${base}Storage`]}.png`
         console.log(mallowpreview_img.src);
     }
 
@@ -333,19 +333,19 @@ function buyItem(item, base) {
         equipButton.className = "equip_button"
         lock.style.display = 'none';
 
-        if (window.sessionStorage[`playerown${base}`].includes(item) == false) {
-            window.sessionStorage[`playerown${base}`] += `${item}`;
+        if (window.localStorage[`playerown${base}`].includes(item) == false) {
+            window.localStorage[`playerown${base}`] += `${item}`;
         }
 
         if (shoptab[base][item]['cost'] == 'Gratis') {
-            window.sessionStorage.playerCoins = geldamount_Data;
-            geld_amount.innerHTML = `$${window.sessionStorage.playerCoins}`;
+            window.localStorage.playerCoins = geldamount_Data;
+            geld_amount.innerHTML = `$${window.localStorage.playerCoins}`;
         }
 
         else {
             geldamount_Data = geldamount_Data - shoptab[base][item]['cost'];
-            window.sessionStorage.playerCoins = geldamount_Data;
-            geld_amount.innerHTML = `$${window.sessionStorage.playerCoins}`;
+            window.localStorage.playerCoins = geldamount_Data;
+            geld_amount.innerHTML = `$${window.localStorage.playerCoins}`;
 
             if (geldamount_Data <= 0) {
                 geldamount_Data = 0;
@@ -374,9 +374,9 @@ function buyItem(item, base) {
 
 // Functie voor het aandoen van items
 function equipItem(item, base) {
-    if (window.sessionStorage[`playerown${base}`].includes(`${item}`)) {
-        window.sessionStorage[`mallow${base}Storage`] = '';
-        window.sessionStorage[`mallow${base}Storage`] = `${item}`;
+    if (window.localStorage[`playerown${base}`].includes(`${item}`)) {
+        window.localStorage[`mallow${base}Storage`] = '';
+        window.localStorage[`mallow${base}Storage`] = `${item}`;
 
         resetcostumes_button.style.display = 'flex';
     }
@@ -384,8 +384,8 @@ function equipItem(item, base) {
 
 // Reseteert Mallo terug naar zonder kleding
 function resetMallowCostume() {
-    window.sessionStorage.mallowhoedenStorage = ''
-    window.sessionStorage.mallowklerenStorage = ''
+    window.localStorage.mallowhoedenStorage = ''
+    window.localStorage.mallowklerenStorage = ''
 
     mallowpreview_img.src = 'images/mallow_sprites/mallow_front.png';
 

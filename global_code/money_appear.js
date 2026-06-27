@@ -8,9 +8,9 @@ function coinCollect(number) {
     coin.style.display = 'none';
 
     geldamount_Data = geldamount_Data + 2;
-    window.sessionStorage.playerCoins = geldamount_Data;
+    window.localStorage.playerCoins = geldamount_Data;
 
-    geld_amount.innerHTML = `$${window.sessionStorage.playerCoins}`;
+    geld_amount.innerHTML = `$${window.localStorage.playerCoins}`;
 
 
     let sound_collectcoin = document.createElement("audio");

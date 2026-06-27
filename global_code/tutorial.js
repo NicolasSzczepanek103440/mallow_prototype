@@ -130,7 +130,10 @@ function tutorial() {
             overslaan_knop.style.display = 'none';
             tutorial_slide = 0;
 
-            window.sessionStorage.playerPlayedBefore = 'true';
+            if (window.localStorage.playerPlayedBefore == 'false') {
+                window.localStorage.playerPlayedBefore = 'true';
+            }
+            
             tutorial_knop.style.display = 'flex';
     }
 }

@@ -108,11 +108,20 @@ function insertInteractionButtons(element) {
 
 // VOOR NICOLAS: IN DE TOEKOMST BEWERKEN
 // Functie om naar de interactiemodus te gaan
+let interactionMode = false;
+let tutorial_button = document.querySelector(".tutorial_btn");
+
 function interactieStart(in_element, type) {
+    interactionMode = true;
+
     console.log(in_element);
     console.log(type);
 
     curtainDo('down');
+
+    setTimeout(function() {
+        tutorial_button.style.display = 'none';
+    }, 2000)
 
     for (let x in knoppen_interactie[in_element]) {
         
@@ -121,6 +130,8 @@ function interactieStart(in_element, type) {
 
         setInterval(function() {
             button.setAttribute("onclick", `itemAppear('${x}')`);
+
+            tutorial_button.style.display = 'none';
         }, 5000);
     }
 
@@ -156,12 +167,18 @@ function itemAppear(type) {
 // Functie om de interactiemenu te verlaten
 // VOOR NICOLAS: IN DE TOEKOMST BEWERKEN
 function normalMode(in_element, type) {
+    interactionMode = false;
+
     curtainDo('down');
+
+    setTimeout(function() {
+        tutorial_button.style.display = 'block';
+    }, 2000)
 
     for (let x in knoppen_interactie[in_element][type]) {
         let button = document.querySelector(`.${type}`);
 
-        button.setAttribute("onclick", `interactieStart('${in_element}', '${type}'`);
+        button.setAttribute("onclick", "");
     
         setTimeout(function () {
             button.setAttribute("onclick", "");
@@ -177,11 +194,9 @@ function normalMode(in_element, type) {
             item.style.display = 'none';
 
             curtainDo('up');
+
+            button.setAttribute("onclick", `interactieStart('${in_element}', '${type}'`);
         }, 3000);
-    
-        setTimeout(function () {
-            button.setAttribute("onclick", `interactieStart('${in_element}', '${type}')`);
-        }, 5000);
 }
     
     }

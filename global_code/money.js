@@ -7,11 +7,11 @@ let geld_amount = document.querySelector(".cash_amount");
 let coin_container = document.querySelector(".coin_container");
 
 // Dit zorgt ervoor dat de hoeveelheid geld een nummer blijft.
-let geldamount_Data = Number(window.sessionStorage.playerCoins);
+let geldamount_Data = Number(window.localStorage.playerCoins);
 
 // Data munten weergeven aan gebruiker
-if (window.sessionStorage.playerCoins != '' || window.sessionStorage.playerCoins != null || window.sessionStorage.playerCoins != undefined) { // Hoeveel munten de gebruiker heeft
-    geld_amount.innerHTML = `$${window.sessionStorage.playerCoins}`;
+if (window.localStorage.playerCoins != '' || window.localStorage.playerCoins != null || window.localStorage.playerCoins != undefined) { // Hoeveel munten de gebruiker heeft
+    geld_amount.innerHTML = `$${window.localStorage.playerCoins}`;
 }
 
 // Geld weergave vertonen en verstoppen

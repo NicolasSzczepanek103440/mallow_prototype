@@ -17,12 +17,12 @@ Mallow right + left: 600x400px
 // IN TOEKOMST BEWERKEN MET PARAMETERS
 
 function mallowDress() {
-    if (window.sessionStorage.mallowhoedenStorage != '' && window.sessionStorage.mallowhoedenStorage != null) {
-        mallow_img.src = `images/hoeden/${window.sessionStorage.mallowhoedenStorage}.png`;
+    if (window.localStorage.mallowhoedenStorage != '' && window.localStorage.mallowhoedenStorage != null) {
+        mallow_img.src = `images/hoeden/${window.localStorage.mallowhoedenStorage}.png`;
     }
     
-    else if (window.sessionStorage.mallowklerenStorage != '' && window.sessionStorage.mallowklerenStorage != null) {
-        mallow_img.src = `images/kleren/${window.sessionStorage.mallowklerenStorage}.png`;
+    else if (window.localStorage.mallowklerenStorage != '' && window.localStorage.mallowklerenStorage != null) {
+        mallow_img.src = `images/kleren/${window.localStorage.mallowklerenStorage}.png`;
     }
     
     else {

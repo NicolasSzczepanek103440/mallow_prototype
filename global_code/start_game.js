@@ -1,5 +1,4 @@
-songChange('catface');
-
-if (window.sessionStorage.playerPlayedBefore == 'false') {
+if (window.localStorage.playerPlayedBefore == 'false') {
     tutorial();
+    songChange('catface');
 }
